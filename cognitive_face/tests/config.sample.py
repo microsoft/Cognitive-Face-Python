@@ -13,4 +13,4 @@ KEY = ''
 
 # Time (in seconds) for sleep between each call to avoid exceeding quota.
 # Default to 3 as free subscription have limit of 20 calls per minute.
-SLEEP_TIME = 3
+TIME_SLEEP = 3

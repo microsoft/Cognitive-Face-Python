@@ -4,6 +4,9 @@
 File: setup.py
 Description: Setup script to build and distribute cognitive_face module.
 """
+
+import io
+
 from setuptools import find_packages
 from setuptools import setup
 
@@ -12,7 +15,7 @@ README = 'README.md'
 
 def readme():
     """Parse README for long_description."""
-    return open(README).read()
+    return io.open(README, encoding='utf-8').read()
 
 
 setup(

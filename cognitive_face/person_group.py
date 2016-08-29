@@ -65,7 +65,7 @@ def get(person_group_id):
     return util.request('GET', url)
 
 
-def status(person_group_id):
+def get_status(person_group_id):
     """Retrieve the training status of a person group (completed or ongoing).
     Training can be triggered by `person_group.train`. The training will
     process for a while on the server side.

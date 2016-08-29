@@ -123,7 +123,7 @@ def wait_for_training(person_group_id):
     """Wait for the finish of person_group training."""
     idx = 1
     while True:
-        res = CF.person_group.status(person_group_id)
+        res = CF.person_group.get_status(person_group_id)
         if res['status'] in ('succeeded', 'failed'):
             break
         print('The training of Person Group {} is onging: #{}'.format(

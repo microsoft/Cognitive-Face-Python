@@ -18,7 +18,8 @@ class TestPersonGroup(unittest.TestCase):
 
     def test_person_group(self):
         """Unittests for `person_group.create`, `person_group.train`,
-        `person_group.update`, `person_group.status` and `person_group.delete`.
+        `person_group.update`, `person_group.get_status` and
+        `person_group.delete`.
         """
         person_group_id = str(uuid.uuid1())
 
@@ -44,7 +45,7 @@ class TestPersonGroup(unittest.TestCase):
         self.assertIsInstance(res, dict)
         util.wait()
 
-        res = CF.person_group.status(person_group_id)
+        res = CF.person_group.get_status(person_group_id)
         print(res)
         self.assertIsInstance(res, dict)
         util.wait()

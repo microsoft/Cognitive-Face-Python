@@ -1,0 +1,9 @@
+[MESSAGES CONTROL]
+
+# Use Python 3 style print for both support 2 and 3.
+disable=superfluous-parens
+
+[SIMILARITIES]
+
+# Minimum lines number of a similarity.
+min-similarity-lines=8

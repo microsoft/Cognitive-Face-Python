@@ -1,5 +1,5 @@
-# Cognitive Face API: Python SDK
-This repo contains the Python SDK for the Cognitive Face API, an offering within [Microsoft Cognitive Services](https://www.microsoft.com/cognitive-services), formerly known as Project Oxford.
+# Microsoft Face API: Python SDK
+This repo contains the Python SDK for the Microsoft Face API, an offering within [Microsoft Cognitive Services](https://www.microsoft.com/cognitive-services), formerly known as Project Oxford.
 
 * [Learn about the Face API](https://www.microsoft.com/cognitive-services/en-us/face-api)
 * [Read the documentation](https://www.microsoft.com/cognitive-services/en-us/face-api/documentation/overview)
@@ -41,6 +41,14 @@ print result
 - More robust unittests (Only test the most basic functionality currently).
 - Add native support for json response by adding some models like `Face`, `FaceList`, `Person` and `PersonGroup`.
 
+# Microsoft Face API: Jupyter Notebook
+ This [Jupyter Notebook](<http://jupyter.org/>) demonstrates how to use Python with the Microsoft Face API, an offering within [Microsoft Cognitive Services](https://www.microsoft.com/cognitive-services), formerly known as Project Oxford.
+ * [Learn about the Face API](https://www.microsoft.com/cognitive-services/en-us/face-api)
+ * [Read the documentation](https://www.microsoft.com/cognitive-services/en-us/face-api/documentation/overview)
+ * [Find more SDKs & Samples](https://www.microsoft.com/cognitive-services/en-us/SDK-Sample?api=face)
+
+
+
 ## Contributing
 We welcome contributions. Feel free to file issues and pull requests on the repo and we'll address them as we can. Learn more about how you can help on our [Contribution Rules & Guidelines](</CONTRIBUTING.md>). 
 
@@ -50,6 +58,8 @@ You can reach out to us anytime with questions and suggestions using our communi
 
 This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/). For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
 
+## Updates
+* 8/2016: Sample updated for [July 2016 Face API changes](https://www.microsoft.com/cognitive-services/en-us/face-api/documentation/overview#changes)
 
 ## License
 All Microsoft Cognitive Services SDKs and samples are licensed with the MIT License. For more details, see

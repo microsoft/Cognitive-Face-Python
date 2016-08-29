@@ -40,8 +40,8 @@ def detect(image, face_id=True, landmarks=False, attributes=''):
                         data=data)
 
 
-def find_similars(face_id, face_list_id=None, face_ids=None, max_candidates=20,
-                  mode='matchPerson'):
+def find_similars(face_id, face_list_id=None, face_ids=None,
+                  max_candidates_return=20, mode='matchPerson'):
     """Given query face's `face_id`, to search the similar-looking faces from a
     `face_id` array or a `face_list_id`.
 
@@ -58,8 +58,8 @@ def find_similars(face_id, face_list_id=None, face_ids=None, max_candidates=20,
         face_ids: An array of candidate `face_id`s. All of them are created by
             `face.detect` and the `face_id`s will expire in 24 hours after the
             detection call. The number of `face_id`s is limited to 1000.
-        max_candidates: Optional parameter. The number of top similar faces
-            returned. The valid range is [1, 1000]. It defaults to 20.
+        max_candidates_return: Optional parameter. The number of top similar
+            faces returned. The valid range is [1, 1000]. It defaults to 20.
         mode: Optional parameter. Similar face searching mode. It can be
             "matchPerson" or "matchFace". It defaults to "matchPerson".
 
@@ -73,7 +73,7 @@ def find_similars(face_id, face_list_id=None, face_ids=None, max_candidates=20,
         'faceId': face_id,
         'faceListId': face_list_id,
         'faceIds': face_ids,
-        'maxNumOfCandidatesReturned': max_candidates,
+        'maxNumOfCandidatesReturned': max_candidates_return,
         'mode': mode,
     }
 
@@ -99,7 +99,8 @@ def group(face_ids):
     return util.request('POST', url, json=json)
 
 
-def identify(face_ids, person_group_id, max_candidates=1, threshold=None):
+def identify(face_ids, person_group_id, max_candidates_return=1,
+             threshold=None):
     """Identify unknown faces from a person group.
 
     Args:
@@ -108,8 +109,8 @@ def identify(face_ids, person_group_id, max_candidates=1, threshold=None):
             `face_ids` is between [1, 10].
         person_group_id: `person_group_id` of the target person group, created
             by `person_group.create`.
-        max_candidates: Optional parameter. The range of `max_candidates` is
-            between 1 and 5 (default is 1).
+        max_candidates_return: Optional parameter. The range of
+            `max_candidates_return` is between 1 and 5 (default is 1).
         threshold: Optional parameter. Confidence threshold of identification,
             used to judge whether one face belongs to one person. The range of
             confidence threshold is [0, 1] (default specified by algorithm).
@@ -121,7 +122,7 @@ def identify(face_ids, person_group_id, max_candidates=1, threshold=None):
     json = {
         'personGroupId': person_group_id,
         'faceIds': face_ids,
-        'maxNumOfCandidatesReturned': max_candidates,
+        'maxNumOfCandidatesReturned': max_candidates_return,
         'confidenceThreshold': threshold,
     }
 

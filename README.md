@@ -19,6 +19,8 @@ python setup.py install
 
 ## Unittests
 
+Before running unittests, please refer to the [/cognitive_face/tests/config.sample.py](/cognitive_face/tests/config.sample.py) and set proper configuration with valid [Subscription Key](https://www.microsoft.com/cognitive-services/en-us/sign-up) to make the unittests work.
+
 ```bash
 python setup.py test
 ```

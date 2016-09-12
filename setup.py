@@ -20,7 +20,7 @@ def readme():
 
 setup(
     name='cognitive_face',
-    version='0.1',
+    version='1.2.0',
     packages=find_packages(exclude=['tests']),
     install_requires=['requests'],
     author='Microsoft',
@@ -29,10 +29,10 @@ setup(
     license='MIT',
     url='https://github.com/Microsoft/Cognitive-Face-Python',
     classifiers=[
-        'Development Status :: 4 - Beta',
+        'Development Status :: 5 - Production/Stable',
         'Intended Audience :: Developers',
         'License :: OSI Approved :: MIT License',
-        'Programming Language :: Python :: 2',
+        'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3',
         'Topic :: Scientific/Engineering :: Image Recognition',
     ],

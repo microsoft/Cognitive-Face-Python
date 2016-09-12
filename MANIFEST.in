@@ -1,4 +1,5 @@
 include CONTRIBUTING.md
 include LICENSE-IMAGE.md
 include LICENSE.md
+include README.md
 include ThirdPartyNotices.txt

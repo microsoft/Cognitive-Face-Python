@@ -34,7 +34,7 @@ KEY = 'subscription key'  # Replace with a valid Subscription Key here.
 CF.Key.set(KEY)
 
 img_url = 'https://raw.githubusercontent.com/Microsoft/Cognitive-Face-Windows/master/Data/detection1.jpg'
-result = cf.face.detect(url)
+result = CF.face.detect(img_url)
 print result
 ```
 

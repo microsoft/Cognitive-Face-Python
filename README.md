@@ -38,6 +38,26 @@ result = CF.face.detect(img_url)
 print result
 ```
 
+## Sample
+
+A Python SDK sample built with wxPython is also provided, before execution,
+please install all components listed below.
+
+### Sample Prerequisite
+
+- [Python 2.7](https://www.python.org/downloads/) (only Python 2 supported due
+  to limitation of wxPython)
+- [wxPython](https://wxpython.org/)
+- [cognitive_face package](https://pypi.python.org/pypi/cognitive_face)
+
+### Sample Execution
+
+```bash
+git clone https://github.com/Microsoft/Cognitive-Face-Python.git
+cd Cognitive-Face-Python
+python sample
+```
+
 ## TODO
 
 - More robust unittests (Only test the most basic functionality currently).

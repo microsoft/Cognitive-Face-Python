@@ -43,14 +43,6 @@ print result
 - More robust unittests (Only test the most basic functionality currently).
 - Add native support for json response by adding some models like `Face`, `FaceList`, `Person` and `PersonGroup`.
 
-# Microsoft Face API: Jupyter Notebook
- This [Jupyter Notebook](<http://jupyter.org/>) demonstrates how to use Python with the Microsoft Face API, an offering within [Microsoft Cognitive Services](https://www.microsoft.com/cognitive-services), formerly known as Project Oxford.
- * [Learn about the Face API](https://www.microsoft.com/cognitive-services/en-us/face-api)
- * [Read the documentation](https://www.microsoft.com/cognitive-services/en-us/face-api/documentation/overview)
- * [Find more SDKs & Samples](https://www.microsoft.com/cognitive-services/en-us/SDK-Sample?api=face)
-
-
-
 ## Contributing
 We welcome contributions. Feel free to file issues and pull requests on the repo and we'll address them as we can. Learn more about how you can help on our [Contribution Rules & Guidelines](</CONTRIBUTING.md>). 
 

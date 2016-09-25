@@ -23,7 +23,6 @@ class MyStaticBitmap(MyPanel):
     """Base StaticBitmap."""
     def __init__(self, parent, bitmap=wx.NullBitmap, size=util.MAX_IMAGE_SIZE):
         super(MyStaticBitmap, self).__init__(parent)
-        self.SetBackgroundColour('#ECF1F5')
         self.bmp = bitmap
         self.scale = 1.0
         self.bitmap = wx.StaticBitmap(self, bitmap=bitmap)
@@ -66,7 +65,6 @@ class MyGridStaticBitmap(wx.Panel):
     def __init__(self, parent, rows=1, cols=0, vgap=0, hgap=0,
                  size=util.MAX_IMAGE_SIZE):
         super(MyGridStaticBitmap, self).__init__(parent)
-        self.SetBackgroundColour('#ECF1F5')
         self.sizer = wx.GridSizer(rows, cols, vgap, hgap)
         self.SetMinSize((size, size))
         self.SetSizer(self.sizer)

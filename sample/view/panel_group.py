@@ -95,6 +95,7 @@ class GroupPanel(base.MyPanel):
         if dlg.ShowModal() == wx.ID_OK:
             path = dlg.GetPath()
             del self.face_paths[:]
+            self.faces.clear()
             for root, dirs, files in os.walk(path):
                 if files:
                     self.face_paths.extend([

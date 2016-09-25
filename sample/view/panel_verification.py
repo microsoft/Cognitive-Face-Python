@@ -274,6 +274,7 @@ class VerificationPanel(base.MyPanel):
             ).format(
                 self.person_name, self.person_id
             ))
+            del self.detected_face_paths[:]
             for path in self.face_paths:
                 res = util.CF.person.add_face(path,
                                               self.person_group_id,

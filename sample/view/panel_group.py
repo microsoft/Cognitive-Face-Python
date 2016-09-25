@@ -53,9 +53,8 @@ class GroupPanel(base.MyPanel):
         self.lsizer.Add(self.btn, 0, flag, 5)
         self.Bind(wx.EVT_BUTTON, self.OnChooseFolder, self.btn)
 
-        flag = wx.ALIGN_CENTER | wx.ALL
         self.grid = base.MyGridStaticBitmap(self.panel, 0, 4, 0, 0)
-        self.lsizer.Add(self.grid, 0, flag, 5)
+        self.lsizer.Add(self.grid, 0, wx.ALL, 5)
 
         self.vhsizer.Add(self.lsizer, 1, wx.EXPAND)
         self.vhsizer.AddSpacer(90)

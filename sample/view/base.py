@@ -29,7 +29,7 @@ class MyStaticBitmap(MyPanel):
         self.size = size
         self.sizer = wx.BoxSizer(wx.VERTICAL)
         self.sizer.AddStretchSpacer()
-        self.sizer.Add(self.bitmap, 0, wx.ALIGN_CENTER_HORIZONTAL)
+        self.sizer.Add(self.bitmap, 0, wx.EXPAND)
         self.sizer.AddStretchSpacer()
         self.SetMinSize((size, size))
         self.SetSizer(self.sizer)
@@ -66,9 +66,7 @@ class MyGridStaticBitmap(wx.Panel):
                  size=util.MAX_IMAGE_SIZE):
         super(MyGridStaticBitmap, self).__init__(parent)
         self.sizer = wx.GridSizer(rows, cols, vgap, hgap)
-        self.SetMinSize((size, size))
         self.SetSizer(self.sizer)
-        self.Layout()
 
     def set_paths(self, paths):
         """Set the paths for the images."""
@@ -78,6 +76,7 @@ class MyGridStaticBitmap(wx.Panel):
             bitmap.set_path(path)
             self.sizer.Add(bitmap)
         self.SetSizerAndFit(self.sizer)
+        self.sizer.Layout()
 
     def set_faces(self, faces):
         """Set the faces."""
@@ -87,6 +86,7 @@ class MyGridStaticBitmap(wx.Panel):
                                     size=util.MAX_THUMBNAIL_SIZE)
             self.sizer.Add(bitmap)
         self.SetSizerAndFit(self.sizer)
+        self.sizer.Layout()
 
 
 class WrapCaptionFaceList(wx.WrapSizer):
@@ -144,13 +144,16 @@ class FindSimilarsResult(wx.Panel):
         self.SetSizerAndFit(self.sizer)
 
 
-class WrapFaceList(wx.WrapSizer):
+class WrapFaceList(wx.Panel):
     """Base wrap face list."""
     def __init__(self, parent, faces, size=util.MAX_THUMBNAIL_SIZE):
-        super(WrapFaceList, self).__init__()
+        super(WrapFaceList, self).__init__(parent)
+        self.sizer = wx.WrapSizer()
+        self.sizer.SetMinSize((util.MAX_IMAGE_SIZE, -1))
         for face in faces:
-            bitmap = MyStaticBitmap(parent, face.bmp, size=size)
-            self.Add(bitmap, 0, wx.ALIGN_LEFT | wx.EXPAND)
+            bitmap = MyStaticBitmap(self, face.bmp, size=size)
+            self.sizer.Add(bitmap, 0, wx.ALIGN_LEFT | wx.EXPAND)
+        self.SetSizer(self.sizer)
         self.Layout()
 
 
@@ -185,7 +188,7 @@ class GroupResult(wx.Panel):
 
         for group in res['groups']:
             static_text = wx.StaticText(self, label='Group:')
-            self.sizer.Add(static_text, 0, wx.ALIGN_LEFT)
+            self.sizer.Add(static_text, 0, wx.EXPAND)
 
             group_faces = [faces[face_id] for face_id in group]
             wrap_face_list = WrapFaceList(self, group_faces, size)
@@ -193,13 +196,14 @@ class GroupResult(wx.Panel):
 
         if res.get('messyGroup'):
             static_text = wx.StaticText(self, label='Group (Messy):')
-            self.sizer.Add(static_text, 0, wx.ALIGN_LEFT)
+            self.sizer.Add(static_text, 0, wx.EXPAND)
 
             group_faces = [faces[face_id] for face_id in res['messyGroup']]
             wrap_face_list = WrapFaceList(self, group_faces, size)
             self.sizer.Add(wrap_face_list, 0, wx.EXPAND)
 
         self.SetSizerAndFit(self.sizer)
+        self.sizer.Layout()
 
 
 class MyLog(wx.TextCtrl):

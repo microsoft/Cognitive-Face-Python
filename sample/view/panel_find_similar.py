@@ -24,6 +24,7 @@ class FindSimilarPanel(base.MyPanel):
         self.face_list_id = str(uuid.uuid1())
         self.face_list_name = self.face_list_id
         self.face_paths = []
+        self.detected_face_paths = []
         self.faces = {}
         self.persisted_faces = {}
 
@@ -155,18 +156,14 @@ class FindSimilarPanel(base.MyPanel):
                         os.path.join(root, filename)
                         for filename in files
                     ])
-        self.grid.set_paths(self.face_paths)
         self.panel.SetupScrolling(scroll_x=False)
-        self.async_load_candidates()
 
-    @util.async
-    def async_load_candidates(self):
-        """Async load candidates."""
         self.log.log('Request: Preparing, detecting faces in chosen folder.')
         self.btn_folder.Disable()
         self.btn_file.Disable()
         self.persisted_faces.clear()
 
+        del self.detected_face_paths[:]
         util.CF.face_list.create(self.face_list_id)
         for path in self.face_paths:
             try:
@@ -176,12 +173,14 @@ class FindSimilarPanel(base.MyPanel):
                     '[Error] Add "{}" to FaceList {}: Code: {}, Message: {}'
                 ).format(path, self.face_list_id, exp.code, exp.msg))
                 continue
+            self.detected_face_paths.append(path)
             face = model.Face(res, path)
             self.persisted_faces[face.persisted_id] = face
         self.log.log(
             'Response: Success. Total {0} faces are detected.'.format(
                 len(self.persisted_faces)))
 
+        self.grid.set_paths(self.detected_face_paths)
         self.btn_folder.Enable()
         self.btn_file.Enable()
 

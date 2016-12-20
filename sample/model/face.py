@@ -33,8 +33,16 @@ class Face(object):
             attr = res['faceAttributes']
             self.age = int(attr['age'])
             self.gender = attr['gender']
+            self.head_pose = "Pitch: {}, Roll:{}, Yaw:{}".format(
+                attr['headPose']['pitch'],
+                attr['headPose']['roll'],
+                attr['headPose']['yaw']
+            )
             self.smile = float(attr['smile']) > 0 and 'Smile' or 'Not Smile'
+            self.facial_hair = sum(attr['facialHair'].values()) > 0 and 'Yes' or 'No'
             self.glasses = attr['glasses']
+            self.emotion = max(attr['emotion'],
+                key=lambda key: attr['emotion'][key])
         self.bmp = util.scale_bitmap(self.bmp, size)
 
     def set_name(self, name):

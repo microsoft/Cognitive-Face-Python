@@ -99,7 +99,7 @@ class DetectionPanel(base.MyPanel):
         self.rsizer.Layout()
         self.vhsizer.Layout()
 
-        attributes = 'age,gender,headPose,smile,facialHair,glasses'
+        attributes = 'age,gender,headPose,smile,facialHair,glasses,emotion'
         res = util.CF.face.detect(path, False, False, attributes)
         faces = [model.Face(face, path) for face in res]
         self.face_list.SetItems(faces)

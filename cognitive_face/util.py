@@ -11,7 +11,7 @@ import requests
 
 import cognitive_face as CF
 
-_BASE_URL = 'https://api.projectoxford.ai/face/v1.0/'
+_BASE_URL = 'https://westus.api.cognitive.microsoft.com/face/v1.0/'
 TIME_SLEEP = 1
 
 

@@ -20,11 +20,10 @@ class SubscriptionPanel(MyPanel):
         self.sizer = wx.BoxSizer(wx.VERTICAL)
 
         label = (
-            'To use the service, you need to ensure that you have right '
-            'subscription key.\nPlease note that each service (Face, Emotion, '
-            'Speech, etc) has its own subscription key.\nIf you do not have '
-            'key yet, please use the link to get a key first, then paste the '
-            'key into the textbox below.'
+            'To use the service, make sure you have a valid subscription key.\n'
+            'Note that each service (Face, Emotion, Speech, etc.) has its own subscription keys.\n'
+            'You can use the link below to get a key.\n'
+            'When ready, paste your key into the textbox below.'
         )
         style = wx.ALIGN_LEFT | wx.ST_ELLIPSIZE_END
         self.static_text = wx.StaticText(self, label=label, style=style)

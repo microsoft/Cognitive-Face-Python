@@ -26,10 +26,9 @@ class DetectionPanel(base.MyPanel):
         self.hvsizer.SetMinSize((util.INNER_PANEL_WIDTH, -1))
 
         label = (
-            "Locate faces in an image. You can pick an image by 'Choose Image"
-            "'. Detected faces will be shown on the image by rectangles "
-            "surrounding the face, and related attributes will be shown in a "
-            "list."
+            "To detect faces in an image, click the 'Choose Image' button. "
+            "You will see a rectangle surrounding every face that the Face API detects. "
+            "You will also see a list of attributes related to the faces."
         )
         self.static_text = wx.StaticText(self, label=label)
         self.static_text.Wrap(util.INNER_PANEL_WIDTH)

@@ -43,10 +43,10 @@ class VerificationPanel(base.MyPanel):
         self.hvsizer.SetMinSize((util.INNER_PANEL_WIDTH, -1))
 
         label = (
-            "Demo 1: Face to Face Verification determines whether two faces"
-            "belong to the same person. You can pick single face image, the"
-            "detected face will be shown on the image. Then click 'Verify' to"
-            "get the verification result."
+            "Demo 1: Face-to-face verification determines whether two faces "
+            "belong to the same person. Load two images containing a single "
+            "face each (either of the same person or of two different people). "
+            "Then click 'Verify' to get the verification result."
         )
         self.static_text = wx.StaticText(self.panel, label=label)
         self.static_text.Wrap(util.INNER_PANEL_WIDTH)
@@ -108,10 +108,10 @@ class VerificationPanel(base.MyPanel):
         self.hvsizer.Add(self.vhsizer1)
 
         label = (
-            "Demo 2: Face to person verification determines whether one face "
-            "belongs to one person. You can pick an image folder containing "
-            "one person's single face, and another single face image. Then "
-            "click 'Verify' to get the verification result."
+            "Demo 2: Face-to-person verification determines whether a face "
+            "belongs to a certain person. Choose a folder containing images "
+            "of a single person's face. Then choose an image to compare to "
+            "that person. Click 'Verify' to get the verification result."
         )
         self.static_text = wx.StaticText(self.panel, label=label)
         self.static_text.Wrap(util.INNER_PANEL_WIDTH)

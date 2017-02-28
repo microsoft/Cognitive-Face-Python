@@ -38,13 +38,17 @@ class IdentificationPanel(base.MyPanel):
         self.hvsizer.SetMinSize((util.INNER_PANEL_WIDTH, -1))
 
         label = (
-            "Tell whom an input face belongs to given a tagged person database"
-            ". Here we only handle tagged person database in following "
-            "format: 1).  One root folder. 2).  Sub-folders are named as "
-            "person's name. 3). Each person's images are put into their own "
-            "sub-folder.  Pick the root folder, then choose an image to "
-            "identify, all faces will be shown on the image with the "
-            "identified person's name."
+            '1) Place face images of one person in a folder and give '
+            'the folder the same name as that person.\n'
+            '2) Repeat the step above one or more times, creating '
+            'different folders for different people.\n'
+            '3) Place all of the person folders in one root folder.\n'
+            '4) Click "Load PersonGroup" and select the root folder '
+            'you created above.\n'
+            '5) Click "Choose Image" to select a different image '
+            'representing one of the people for whom you created '
+            'folders above. The face in the image will be framed and '
+            'tagged with the name of the person.'
         )
         self.static_text = wx.StaticText(self.panel, label=label)
         self.static_text.Wrap(util.INNER_PANEL_WIDTH)

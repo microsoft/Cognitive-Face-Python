@@ -34,10 +34,10 @@ class GroupPanel(base.MyPanel):
         self.hvsizer.SetMinSize((util.INNER_PANEL_WIDTH, -1))
 
         label = (
-            "Put similar faces to same group according to appearance "
-            "similarity. You can pick an image folder for grouping by "
-            "'Group', doing this will group all detected faces and shown "
-            "under Grouping Result."
+            'Click the button below to select a folder containing face '
+            'images.\nThe images will be grouped based on similarity.\n'
+            'You will see the different groups under the '
+            '"Grouping Results" label.'
         )
         self.static_text = wx.StaticText(self.panel, label=label)
         self.static_text.Wrap(util.INNER_PANEL_WIDTH)

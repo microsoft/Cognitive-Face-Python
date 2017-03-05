@@ -39,19 +39,12 @@ class FindSimilarPanel(base.MyPanel):
         self.hvsizer.SetMinSize((util.INNER_PANEL_WIDTH, -1))
 
         label = (
-            "Find similar faces for the query face from all the candidates. "
-            "You can pick an image folder, and all detected faces inside the "
-            "folder will be treated as candidate. Use 'Open Query Face' to "
-            "pick the query faces. The result will be list as 'query face's "
-            "thumbnail', 'similar faces' thumbnails with similarity ranked'. "
-            "Both of 'MatchPerson' mode and 'MatchFace' mode results will be "
-            "listed. 'MatchPerson' mode return the top candidate faces among "
-            "those recognized as the same person with the query face, so if "
-            "no candidate faces are recognized as the same person with the "
-            "query face, no one will be returned, while 'MatchFace' mode "
-            "returns the top candidate faces with highest similarity "
-            "confidence without checking if the returned face belong to the "
-            "same person with the query face. "
+            'Find faces that are similar to a given face (the query '
+            'face).\nClick "Load Candidate Faces" to select a folder '
+            'containing images of the faces you want to compare to the '
+            'query face.\nNext, click "Open Query Face" to select the '
+            'query face image.\nScroll down to see the results '
+            'displayed under the query face.\n'
         )
         self.static_text = wx.StaticText(self.panel, label=label)
         self.static_text.Wrap(util.INNER_PANEL_WIDTH)

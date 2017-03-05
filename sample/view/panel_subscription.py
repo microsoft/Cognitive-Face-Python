@@ -20,11 +20,11 @@ class SubscriptionPanel(MyPanel):
         self.sizer = wx.BoxSizer(wx.VERTICAL)
 
         label = (
-            'To use the service, you need to ensure that you have right '
-            'subscription key.\nPlease note that each service (Face, Emotion, '
-            'Speech, etc) has its own subscription key.\nIf you do not have '
-            'key yet, please use the link to get a key first, then paste the '
-            'key into the textbox below.'
+            'To use the service, make sure you have a valid '
+            'subscription key.\nNote that each service (Face, Emotion, '
+            'Speech, etc.) has its own subscription keys.\nYou can use '
+            'the link below to get a key.\nWhen ready, paste your key '
+            'into the textbox below.'
         )
         style = wx.ALIGN_LEFT | wx.ST_ELLIPSIZE_END
         self.static_text = wx.StaticText(self, label=label, style=style)
@@ -68,7 +68,7 @@ class SubscriptionPanel(MyPanel):
         """Save the key."""
         util.SubscriptionKey.set(self.text.GetValue().encode('utf-8'))
         text = (
-            'Subscription key is saved in your disk.\n'
+            'Subscription key successfully saved on your disk.\n'
             'You do not need to paste the key next time.'
         )
         title = 'Subscription Key'
@@ -79,7 +79,7 @@ class SubscriptionPanel(MyPanel):
         """Delete the key."""
         self.text.Clear()
         util.SubscriptionKey.delete()
-        text = 'Subscription key is deleted from your disk.'
+        text = 'Subscription key successfully deleted from your disk.'
         title = 'Subscription Key'
         style = wx.OK | wx.ICON_INFORMATION
         wx.MessageBox(text, title, style)

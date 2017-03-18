@@ -242,11 +242,14 @@ class MyFaceList(wx.VListBox):
 
         textx = rect.x + 2 + face.bmp.GetWidth() + 2
         label_rect = wx.Rect(textx, rect.y, rect.width - textx, rect.height)
-        label = '{} years old\n{}\n{}\n{}\n'.format(
+        label = util.LABEL_FACE.format(
             face.age,
             face.gender,
+            face.head_pose,
             face.smile,
-            face.glasses
+            face.glasses,
+            face.facial_hair,
+            face.emotion
         )
         dc.DrawLabel(label, label_rect, wx.ALIGN_LEFT | wx.ALIGN_TOP)
 

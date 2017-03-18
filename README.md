@@ -59,7 +59,7 @@ python sample
 ```
 
 ## Contributing
-We welcome contributions. Feel free to file issues and pull requests on the repo and we'll address them as we can. Learn more about how you can help on our [Contribution Rules & Guidelines](</CONTRIBUTING.md>). 
+We welcome contributions. Feel free to file issues and pull requests on the repo and we'll address them as we can. Learn more about how you can help on our [Contribution Rules & Guidelines](</CONTRIBUTING.md>).
 
 You can reach out to us anytime with questions and suggestions using our communities below:
  - **Support questions:** [StackOverflow](<https://stackoverflow.com/questions/tagged/microsoft-cognitive>)
@@ -68,7 +68,7 @@ You can reach out to us anytime with questions and suggestions using our communi
 This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/). For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
 
 ## Updates
-* 8/2016: Sample updated for [July 2016 Face API changes](https://www.microsoft.com/cognitive-services/en-us/face-api/documentation/overview#changes)
+* [Face API Release Notes](https://www.microsoft.com/cognitive-services/en-us/face-api/documentation/ReleaseNotes)
 
 ## License
 All Microsoft Cognitive Services SDKs and samples are licensed with the MIT License. For more details, see

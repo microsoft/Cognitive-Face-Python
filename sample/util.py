@@ -32,6 +32,7 @@ LOG_FACE_LIST_REQUEST = (
 )
 LOG_FACE_LIST_NOT_EXIST = 'Response: Face List {} does not exist before.'
 LOG_FACE_LIST_EXIST = 'Response: Face List {} exists.'
+LABEL_FACE = '{} years old, {}\n{}\n{}, {}\nFacial Hair: {}\nEmotion: {}\n'
 
 
 class SubscriptionKey(object):

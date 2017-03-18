@@ -242,7 +242,7 @@ class MyFaceList(wx.VListBox):
 
         textx = rect.x + 2 + face.bmp.GetWidth() + 2
         label_rect = wx.Rect(textx, rect.y, rect.width - textx, rect.height)
-        label = '{} years old, {}\n{}\n{}, {}\nFacial Hair: {}\nEmotion: {}\n'.format(
+        label = util.LABEL_FACE.format(
             face.age,
             face.gender,
             face.head_pose,

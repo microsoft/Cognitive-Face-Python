@@ -145,20 +145,27 @@ def get_face(person_group_id, person_id, persisted_face_id):
     return util.request('GET', url)
 
 
-def lists(person_group_id):
+def lists(person_group_id, start=None, top=None):
     """List all persons in a person group, and retrieve person information
     (including `person_id`, `name`, `user_data` and `persisited_face_ids` of
     registered faces of the person).
 
     Args:
         person_group_id: `person_group_id` of the target person group.
+        start: List persons from the least `person_id` greater than this.
+        top: The number of persons to list, rangeing in [1, 1000]. Default is
+            1000;
 
     Returns:
         An array of person information that belong to the person group.
     """
     url = 'persongroups/{}/persons'.format(person_group_id)
+    params = {
+        'start': start,
+        'top': top,
+    }
 
-    return util.request('GET', url)
+    return util.request('GET', url, params=params)
 
 
 def update(person_group_id, person_id, name=None, user_data=None):

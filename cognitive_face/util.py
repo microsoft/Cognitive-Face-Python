@@ -75,9 +75,13 @@ def request(method, url, data=None, json=None, headers=None, params=None):
     result = None
     # `person_group.train` return 202 status code for success.
     if response.status_code not in (200, 202):
-        print('status_code: {}'.format(response.status_code))
-        print('response: {}'.format(response.text))
-        error_msg = response.json()['error']
+        try:
+            error_msg = response.json()['error']
+        except:
+            raise CognitiveFaceException(
+                response.status_code,
+                response.status_code,
+                response.text)
         raise CognitiveFaceException(
             response.status_code,
             error_msg.get('code'),

@@ -37,25 +37,12 @@ class MyStaticBitmap(MyPanel):
 
     def set_path(self, path):
         """Set the image path."""
-        bitmap = wx.Bitmap(path)
-        self.bmp = util.scale_bitmap(bitmap, size=self.size)
-
-        width = bitmap.GetWidth()
-        new_width = self.bmp.GetWidth()
-
+        img = util.rotate_image(path)
+        width = img.GetWidth()
+        img = util.scale_image(img, size=self.size)
+        new_width = img.GetWidth()
         self.scale = 1.0 * new_width / width
-
-        self.bitmap.SetBitmap(self.bmp)
-        self.sizer.Layout()
-
-    def set_bmp(self, bitmap):
-        """Set the image bitmap."""
-        self.bmp = util.scale_bitmap(bitmap, size=self.size)
-        width = bitmap.GetWidth()
-        new_width = self.bmp.GetWidth()
-
-        self.scale = 1.0 * new_width / width
-
+        self.bmp = img.ConvertToBitmap()
         self.bitmap.SetBitmap(self.bmp)
         self.sizer.Layout()
 
@@ -63,16 +50,17 @@ class MyStaticBitmap(MyPanel):
 class MyGridStaticBitmap(wx.Panel):
     """Base Grid StaticBitmap."""
     def __init__(self, parent, rows=1, cols=0, vgap=0, hgap=0,
-                 size=util.MAX_IMAGE_SIZE):
+                 size=util.MAX_THUMBNAIL_SIZE):
         super(MyGridStaticBitmap, self).__init__(parent)
         self.sizer = wx.GridSizer(rows, cols, vgap, hgap)
         self.SetSizer(self.sizer)
+        self.size = size
 
     def set_paths(self, paths):
         """Set the paths for the images."""
         self.sizer.Clear(True)
         for path in paths:
-            bitmap = MyStaticBitmap(self, size=util.MAX_THUMBNAIL_SIZE)
+            bitmap = MyStaticBitmap(self, size=self.size)
             bitmap.set_path(path)
             self.sizer.Add(bitmap)
         self.SetSizerAndFit(self.sizer)
@@ -82,8 +70,7 @@ class MyGridStaticBitmap(wx.Panel):
         """Set the faces."""
         self.sizer.Clear(True)
         for face in faces:
-            bitmap = MyStaticBitmap(self, bitmap=face.bmp,
-                                    size=util.MAX_THUMBNAIL_SIZE)
+            bitmap = MyStaticBitmap(self, bitmap=face.bmp, size=self.size)
             self.sizer.Add(bitmap)
         self.SetSizerAndFit(self.sizer)
         self.sizer.Layout()
@@ -231,7 +218,7 @@ class MyFaceList(wx.VListBox):
         """OnMeasureItem for Layout."""
         face = self.faces[index]
         bmp_height = face.bmp.GetHeight() + 4
-        label_height = self.GetTextExtent(face.glasses)[1] * 4 + 8
+        label_height = self.GetTextExtent(face.attr.gender)[1] * 6
         return max(bmp_height, label_height)
 
     def OnDrawItem(self, dc, rect, index):
@@ -243,13 +230,16 @@ class MyFaceList(wx.VListBox):
         textx = rect.x + 2 + face.bmp.GetWidth() + 2
         label_rect = wx.Rect(textx, rect.y, rect.width - textx, rect.height)
         label = util.LABEL_FACE.format(
-            face.age,
-            face.gender,
-            face.head_pose,
-            face.smile,
-            face.glasses,
-            face.facial_hair,
-            face.emotion
+            face.attr.gender,
+            face.attr.age,
+            face.attr.hair,
+            face.attr.facial_hair,
+            face.attr.makeup,
+            face.attr.emotion,
+            face.attr.occlusion,
+            face.attr.exposure,
+            face.attr.head_pose,
+            face.attr.accessories
         )
         dc.DrawLabel(label, label_rect, wx.ALIGN_LEFT | wx.ALIGN_TOP)
 

@@ -39,7 +39,7 @@ LABEL_FACE = (
     '{}, {} years old\n'
     'Hair: {}, Facial Hair: {}\n'
     'Makeup: {}, Emotion: {}\n'
-    'Occluded: {}, {}\n'
+    'Occluded: {}, Exposure: {}\n'
     '{}\n{}\n'
 )
 

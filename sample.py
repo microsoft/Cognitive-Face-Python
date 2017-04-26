@@ -12,11 +12,13 @@ group = CF.person_group.get('my_anthem')
 
 faceNumber = result[0][u'faceId']
 
+faceList = [ faceNumber ]
+
 identifyPerson = CF.person.lists('my_anthem')
 
 
 # This call isn't working why 
-whoIsShe = CF.face.identify(faceNumber, 'my_anthem', 1)
+whoIsShe = CF.face.identify(faceList, 'my_anthem', 1)
 
 print '-----------------'
 

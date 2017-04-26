@@ -17,7 +17,7 @@ faceList = [ faceNumber ]
 identifyPerson = CF.person.lists('my_anthem')
 
 
-# This call isn't working why 
+# This compares our known faceId to our group
 whoIsShe = CF.face.identify(faceList, 'my_anthem', 1)
 
 print '-----------------'

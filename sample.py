@@ -12,8 +12,25 @@ faceNumber = result[0][u'faceId']
 # This compares our known faceId to our group
 whoIsShe = CF.face.identify([ faceNumber ], 'my_anthem', 1)
 
+recognizedId = whoIsShe[0][u'candidates'][0][u'personId']
+
 print '-----------------'
 
 print whoIsShe
 
+print '-----------------'
+
+print whoIsShe[0][u'candidates'][0][u'personId']
+
+if recognizedId == face.RACHEL:
+  print "we found it!"
+  print "It's Rachel"
+elif recognizedId == face.TIERNEY:
+  print "we found it!"
+  print "It's Tierney!"
+elif recognizedId == face.ANNIE:
+  print "we found it!"
+  print "It's Annie!"
+else:
+   print "I don't know her"
 

@@ -19,9 +19,9 @@ def detect(image, face_id=True, landmarks=False, attributes=''):
             not. The default value is false.
         attributes: [Optional] Analyze and return the one or more specified
             face attributes in the comma-separated string like
-            "returnFaceAttributes=age,gender". Supported face attributes
-            include age, gender, headPose, smile, facialHair, glasses and
-            emotion. Note that each face attribute analysis has additional
+            "age,gender". Supported face attributes include age, gender,
+            headPose, smile, facialHair, glasses and emotion.
+            Note that each face attribute analysis has additional
             computational and time cost.
 
     Returns:

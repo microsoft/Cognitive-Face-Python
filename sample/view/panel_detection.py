@@ -99,17 +99,25 @@ class DetectionPanel(base.MyPanel):
         self.rsizer.Layout()
         self.vhsizer.Layout()
 
-        attributes = 'age,gender,headPose,smile,facialHair,glasses,emotion'
-        res = util.CF.face.detect(path, False, False, attributes)
-        faces = [model.Face(face, path) for face in res]
-        self.face_list.SetItems(faces)
-        util.draw_bitmap_rectangle(self.bitmap, faces)
+        try:
+            attributes = (
+                'age,gender,headPose,smile,facialHair,glasses,emotion,hair,'
+                'makeup,occlusion,accessories,blur,exposure,noise'
+            )
+            res = util.CF.face.detect(path, False, False, attributes)
+            faces = [model.Face(face, path) for face in res]
+            self.face_list.SetItems(faces)
+            util.draw_bitmap_rectangle(self.bitmap, faces)
 
-        log_text = 'Response: Success. Detected {} face(s) in {}'.format(
-            len(res), path)
-        self.log.log(log_text)
-        text = '{} face(s) has been detected.'.format(len(res))
-        self.result.SetLabelText(text)
+            log_text = 'Response: Success. Detected {} face(s) in {}'.format(
+                len(res), path)
+            self.log.log(log_text)
+            text = '{} face(s) has been detected.'.format(len(res))
+            self.result.SetLabelText(text)
+        except util.CF.CognitiveFaceException as exp:
+            self.log.log('Response: {}. {}'.format(exp.code, exp.msg))
+            return
+
         self.btn.Enable()
         self.rsizer.Layout()
         self.vhsizer.Layout()

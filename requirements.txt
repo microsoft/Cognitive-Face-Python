@@ -1,4 +1,5 @@
-requests
 pep8
+pillow
 pyflakes
 pylint
+requests

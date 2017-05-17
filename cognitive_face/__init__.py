@@ -12,3 +12,4 @@ from . import person_group
 from . import util
 from .util import CognitiveFaceException
 from .util import Key
+from .util import BaseUrl

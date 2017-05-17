@@ -13,18 +13,6 @@ import cognitive_face as CF
 
 DEFAULT_BASE_URL = 'https://westus.api.cognitive.microsoft.com/face/v1.0/'
 
-class BaseUrl(object):
-
-    @classmethod
-    def set(cls, base_url):
-        cls.base_url = base_url
-
-    @classmethod
-    def get(cls):
-        if not hasattr(cls, 'base_url'):
-            cls.base_url = DEFAULT_BASE_URL
-        return cls.base_url
-
 TIME_SLEEP = 1
 
 
@@ -65,6 +53,19 @@ class Key(object):
         if not hasattr(cls, 'key'):
             cls.key = None
         return cls.key
+
+
+class BaseUrl(object):
+
+    @classmethod
+    def set(cls, base_url):
+        cls.base_url = base_url
+
+    @classmethod
+    def get(cls):
+        if not hasattr(cls, 'base_url') or not cls.base_url:
+            cls.base_url = DEFAULT_BASE_URL
+        return cls.base_url
 
 
 def request(method, url, data=None, json=None, headers=None, params=None):

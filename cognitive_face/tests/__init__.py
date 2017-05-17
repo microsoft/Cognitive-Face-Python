@@ -23,9 +23,11 @@ def setUpModule():
     """Setup for the whole unitests.
 
     - Set Subscription Key.
+    - Set API Region.
     - Setup needed data for unitests.
     """
     CF.Key.set(config.KEY)
+    CF.Region.set(config.REGION)
     util.DataStore.setup_person_group()
     util.DataStore.setup_face_list()
     util.DataStore.setup_face()

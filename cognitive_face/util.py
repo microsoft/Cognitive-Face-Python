@@ -11,7 +11,35 @@ import requests
 
 import cognitive_face as CF
 
-_BASE_URL = 'https://westus.api.cognitive.microsoft.com/face/v1.0/'
+
+class Region(object):
+    """Manage API region"""
+
+    @classmethod
+    def set(cls, region):
+        """Set the API region"""
+        cls.region = region
+
+    @classmethod
+    def get(cls):
+        """Get the API region"""
+        if not hasattr(cls, 'region'):
+            cls.region = 'uswest'
+        return cls.region
+
+
+class BaseUrl(object):
+
+    @classmethod
+    def set(cls, url):
+        cls.url = url
+
+    @classmethod
+    def get(cls):
+        if not hasattr(cls, 'url'):
+            cls.url = 'https://' + Region.get() + '.api.cognitive.microsoft.com/face/v1.0/'
+        return cls.url
+
 TIME_SLEEP = 1
 
 
@@ -58,9 +86,9 @@ def request(method, url, data=None, json=None, headers=None, params=None):
     # pylint: disable=too-many-arguments
     """Universal interface for request."""
 
-    # Make it possible to call only with short name (without _BASE_URL).
+    # Make it possible to call only with short name (without BaseUrl).
     if not url.startswith('https://'):
-        url = _BASE_URL + url
+        url = BaseUrl.get() + url
 
     # Setup the headers with default Content-Type and Subscription Key.
     headers = headers or {}
@@ -87,7 +115,7 @@ def request(method, url, data=None, json=None, headers=None, params=None):
             error_msg.get('code'),
             error_msg.get('message'))
 
-    # Prevent `reponse.json()` complains about empty response.
+    # Prevent `response.json()` complains about empty response.
     if response.text:
         result = response.json()
     else:
@@ -117,7 +145,7 @@ def parse_image(image):
         headers = {'Content-Type': 'application/octet-stream'}
         data = open(image, 'rb').read()
         return headers, data, None
-    else:  # Defailt treat it as a URL (string).
+    else:  # Default treat it as a URL (string).
         headers = {'Content-Type': 'application/json'}
         json = {'url': image}
         return headers, None, json

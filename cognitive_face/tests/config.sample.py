@@ -11,8 +11,9 @@ Description: unittest configuration for Python SDK of the Cognitive Face API.
 # Subscription Key for calling the Cognitive Face API.
 KEY = ''
 
-# Region for calling the Cognitive Face API.
-REGION = ''
+# Base URL for calling the Cognitive Face API.
+# default is 'https://westus.api.cognitive.microsoft.com/face/v1.0/'
+BASE_URL = ''
 
 # Time (in seconds) for sleep between each call to avoid exceeding quota.
 # Default to 3 as free subscription have limit of 20 calls per minute.

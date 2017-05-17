@@ -11,34 +11,19 @@ import requests
 
 import cognitive_face as CF
 
-
-class Region(object):
-    """Manage API region"""
-
-    @classmethod
-    def set(cls, region):
-        """Set the API region"""
-        cls.region = region
-
-    @classmethod
-    def get(cls):
-        """Get the API region"""
-        if not hasattr(cls, 'region'):
-            cls.region = 'uswest'
-        return cls.region
-
+DEFAULT_BASE_URL = 'https://westus.api.cognitive.microsoft.com/face/v1.0/'
 
 class BaseUrl(object):
 
     @classmethod
-    def set(cls, url):
-        cls.url = url
+    def set(cls, base_url):
+        cls.base_url = base_url
 
     @classmethod
     def get(cls):
-        if not hasattr(cls, 'url'):
-            cls.url = 'https://' + Region.get() + '.api.cognitive.microsoft.com/face/v1.0/'
-        return cls.url
+        if not hasattr(cls, 'base_url'):
+            cls.base_url = DEFAULT_BASE_URL
+        return cls.base_url
 
 TIME_SLEEP = 1
 

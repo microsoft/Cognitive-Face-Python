@@ -12,6 +12,7 @@ import uuid
 import cognitive_face as CF
 
 from . import config
+import six
 
 # Base URL of online images.
 BASE_URL_IMAGE = (
@@ -24,7 +25,7 @@ MSG_WAIT = 'Wait for {} seconds so as to avoid exceeding free quote.'
 
 def wait():
     """Wait for some interval to avoid exceeding quote."""
-    print(MSG_WAIT.format(config.TIME_SLEEP))
+    six.print_((MSG_WAIT.format(config.TIME_SLEEP)))
     time.sleep(config.TIME_SLEEP)
 
 
@@ -37,26 +38,26 @@ class DataStore(object):
         image = '{}PersonGroup/Family1-Dad/Family1-Dad3.jpg'.format(
             BASE_URL_IMAGE)
         res = CF.face.detect(image)
-        print('[face_id] res: {}'.format(res))
+        six.print_(('[face_id] res: {}'.format(res)))
         cls.face_id = res[0]['faceId']
-        print('[face_id]: {}'.format(cls.face_id))
+        six.print_(('[face_id]: {}'.format(cls.face_id)))
         wait()
 
         image = '{}PersonGroup/Family1-Mom/Family1-Mom3.jpg'.format(
             BASE_URL_IMAGE)
         res = CF.face.detect(image)
-        print('[another_face_id] res: {}'.format(res))
+        six.print_(('[another_face_id] res: {}'.format(res)))
         cls.another_face_id = res[0]['faceId']
-        print('[another_face_id]: {}'.format(cls.another_face_id))
+        six.print_(('[another_face_id]: {}'.format(cls.another_face_id)))
         wait()
 
         image = '{}identification1.jpg'.format(BASE_URL_IMAGE)
         res = CF.face.detect(image)
         cls.face_ids = []
-        print('[face_ids] res: {}'.format(res))
+        six.print_(('[face_ids] res: {}'.format(res)))
         for face in res:
             cls.face_ids.append(face['faceId'])
-        print('[face_ids]: {}'.format(cls.face_ids))
+        six.print_(('[face_ids]: {}'.format(cls.face_ids)))
         wait()
 
     @classmethod
@@ -64,8 +65,8 @@ class DataStore(object):
         """Setup Face List related data."""
         cls.face_list_id = str(uuid.uuid1())
         res = CF.face_list.create(cls.face_list_id)
-        print('[face_list_id] res: {}'.format(res))
-        print('[face_list_id]: {}'.format(cls.face_list_id))
+        six.print_(('[face_list_id] res: {}'.format(res)))
+        six.print_(('[face_list_id]: {}'.format(cls.face_list_id)))
         wait()
 
         cls.face_persisted_face_id = {}
@@ -78,10 +79,10 @@ class DataStore(object):
 
                 res = CF.face_list.add_face(image, cls.face_list_id)
                 cls.face_persisted_face_id[name].append(res['persistedFaceId'])
-                print('[face_persisted_face_id.{}.{}] res: {}'.format(
-                    name, idx, res))
-                print('[face_persisted_face_id.{}]: {}'.format(
-                    name, cls.face_persisted_face_id[name]))
+                six.print_(('[face_persisted_face_id.{}.{}] res: {}'.format(
+                    name, idx, res)))
+                six.print_(('[face_persisted_face_id.{}]: {}'.format(
+                    name, cls.face_persisted_face_id[name])))
                 wait()
 
     @classmethod
@@ -89,8 +90,8 @@ class DataStore(object):
         """Setup Person and Person Group related data."""
         cls.person_group_id = str(uuid.uuid1())
         res = CF.person_group.create(cls.person_group_id)
-        print('[person_group_id] res: {}'.format(res))
-        print('[person_group_id]: {}'.format(cls.person_group_id))
+        six.print_(('[person_group_id] res: {}'.format(res)))
+        six.print_(('[person_group_id]: {}'.format(cls.person_group_id)))
         wait()
 
         cls.person_id = {}
@@ -99,8 +100,8 @@ class DataStore(object):
         for name in ['Dad', 'Daughter', 'Mom', 'Son']:
             res = CF.person.create(cls.person_group_id, name)
             cls.person_id[name] = res['personId']
-            print('[person_id.{}] res: {}'.format(name, res))
-            print('[person_id.{}]: {}'.format(name, cls.person_id[name]))
+            six.print_(('[person_id.{}] res: {}'.format(name, res)))
+            six.print_(('[person_id.{}]: {}'.format(name, cls.person_id[name])))
             wait()
 
             cls.person_persisted_face_id[name] = []
@@ -112,12 +113,12 @@ class DataStore(object):
                     image, cls.person_group_id, cls.person_id[name])
                 cls.person_persisted_face_id[name].append(
                     res['persistedFaceId'])
-                print('[person_persisted_face_id.{}.{}] res: {}'.format(
-                    name, idx, res))
-                print('[person_persisted_face_id.{}]: {}'.format(
-                    name, cls.person_persisted_face_id[name]))
+                six.print_(('[person_persisted_face_id.{}.{}] res: {}'.format(
+                    name, idx, res)))
+                six.print_(('[person_persisted_face_id.{}]: {}'.format(
+                    name, cls.person_persisted_face_id[name])))
                 wait()
 
         res = CF.person_group.train(cls.person_group_id)
-        print('[person_group.train]res: {}', res)
+        six.print_(('[person_group.train]res: {}', res))
         wait()

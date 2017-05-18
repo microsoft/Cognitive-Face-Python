@@ -11,6 +11,7 @@ import os.path
 
 from PIL import Image
 import wx
+import six
 
 try:
     import cognitive_face as CF
@@ -66,7 +67,7 @@ class SubscriptionKey(object):
         """Set the subscription key."""
         cls.key = key
         with file(SUBSCRIPTION_KEY_FILENAME, 'w') as fout:
-            print >>fout, key
+            six.print_(key, file=fout)
         CF.Key.set(cls.key)
 
     @classmethod
@@ -145,7 +146,7 @@ def pil_image_to_wx_image(pil_image):
 
 def key_with_max_value(item):
     """Get the key with maximum value in a dict."""
-    return max(item.iteritems(), key=operator.itemgetter(1))[0]
+    return max(six.iteritems(item), key=operator.itemgetter(1))[0]
 
 
 def async(func):

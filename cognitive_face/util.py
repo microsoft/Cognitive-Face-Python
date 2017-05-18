@@ -10,6 +10,7 @@ import time
 import requests
 
 import cognitive_face as CF
+import six
 
 DEFAULT_BASE_URL = 'https://westus.api.cognitive.microsoft.com/face/v1.0/'
 
@@ -144,8 +145,8 @@ def wait_for_training(person_group_id):
         res = CF.person_group.get_status(person_group_id)
         if res['status'] in ('succeeded', 'failed'):
             break
-        print('The training of Person Group {} is onging: #{}'.format(
-            person_group_id, idx))
+        six.print_(('The training of Person Group {} is onging: #{}'.format(
+            person_group_id, idx)))
         time.sleep(2**idx)
         idx += 1
 
@@ -157,7 +158,7 @@ def clear_face_lists():
     for face_list in face_lists:
         face_list_id = face_list['faceListId']
         CF.face_list.delete(face_list_id)
-        print('Deleting Face List {}'.format(face_list_id))
+        six.print_(('Deleting Face List {}'.format(face_list_id)))
         time.sleep(TIME_SLEEP)
 
 
@@ -169,5 +170,5 @@ def clear_person_groups():
     for person_group in person_groups:
         person_group_id = person_group['personGroupId']
         CF.person_group.delete(person_group_id)
-        print('Deleting Person Group {}'.format(person_group_id))
+        six.print_(('Deleting Person Group {}'.format(person_group_id)))
         time.sleep(TIME_SLEEP)

@@ -92,3 +92,4 @@ ENV/
 *.swp
 config.py
 Subscription.txt
+Endpoint.txt

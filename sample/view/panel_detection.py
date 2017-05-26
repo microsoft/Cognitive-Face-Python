@@ -116,7 +116,6 @@ class DetectionPanel(base.MyPanel):
             self.result.SetLabelText(text)
         except util.CF.CognitiveFaceException as exp:
             self.log.log('Response: {}. {}'.format(exp.code, exp.msg))
-            return
 
         self.btn.Enable()
         self.rsizer.Layout()

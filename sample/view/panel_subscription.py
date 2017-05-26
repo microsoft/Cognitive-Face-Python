@@ -39,29 +39,34 @@ class SubscriptionPanel(MyPanel):
         self.link.SetBackgroundColour(colour_window)
         self.sizer.Add(self.link, flag=flag, border=5)
 
-        subsizer = wx.GridSizer(rows=3, cols=2)
+        subgridsizer = wx.GridSizer(rows=2, cols=2)
 
         flag = wx.ALIGN_CENTER_VERTICAL | wx.ALL | wx.FIXED_MINSIZE
         label = 'Subscription Key : '
         self.subscription_key_label = wx.StaticText(self, label=label)
-        subsizer.Add(self.subscription_key_label, flag=flag, border=5)
+        subgridsizer.Add(self.subscription_key_label, flag=flag, border=5)
 
         flag = wx.EXPAND | wx.ALIGN_CENTER_VERTICAL | wx.ALL
         subscription_key = util.SubscriptionKey.get().decode('utf-8')
         self.subscription_key_text = wx.TextCtrl(self, size=(-1, -1))
         self.subscription_key_text.SetValue(subscription_key)
-        subsizer.Add(self.subscription_key_text, 1, flag=flag, border=5)
+        subgridsizer.Add(self.subscription_key_text, 1, flag=flag, border=5)
 
         flag = wx.ALIGN_CENTER_VERTICAL | wx.ALL | wx.FIXED_MINSIZE
         label = 'Endpoint : '
         self.endpoint_label = wx.StaticText(self, label=label)
-        subsizer.Add(self.endpoint_label, flag=flag, border=5)
+        subgridsizer.Add(self.endpoint_label, flag=flag, border=5)
 
         flag = wx.EXPAND | wx.ALIGN_CENTER_VERTICAL | wx.ALL
         endpoint = util.Endpoint.get().decode('utf-8')
         self.endpoint_text = wx.TextCtrl(self, size=(-1, -1))
         self.endpoint_text.SetValue(endpoint)
-        subsizer.Add(self.endpoint_text, 1, flag=flag, border=5)
+        subgridsizer.Add(self.endpoint_text, 1, flag=flag, border=5)
+
+        flag = wx.EXPAND | wx.TOP | wx.BOTTOM
+        self.sizer.Add(subgridsizer, flag=flag, border=5)
+
+        subsizer = wx.BoxSizer()
 
         flag = wx.ALIGN_CENTER_VERTICAL | wx.ALL | wx.FIXED_MINSIZE
         self.btn_save = wx.Button(self, label='Save')
@@ -94,10 +99,10 @@ class SubscriptionPanel(MyPanel):
 
     def OnDelete(self, evt):
         """Delete the key and endpoint."""
-        self.subscription_key_text.Clear()
-        self.endpoint_text.SetValue(CF.util.DEFAULT_BASE_URL)
         util.SubscriptionKey.delete()
         util.Endpoint.delete()
+        self.subscription_key_text.Clear()
+        self.endpoint_text.SetValue(util.Endpoint.get())
         text = 'Settings successfully deleted from your disk.'
         title = 'Settings'
         style = wx.OK | wx.ICON_INFORMATION

@@ -110,7 +110,7 @@ class Endpoint(object):
         cls.endpoint = ''
         if os.path.isfile(ENDPOINT_FILENAME):
             os.remove(ENDPOINT_FILENAME)
-        CF.BaseUrl.set(cls.endpoint)
+        CF.BaseUrl.set(CF.util.DEFAULT_BASE_URL)
 
 
 def scale_image(img, size=MAX_IMAGE_SIZE):

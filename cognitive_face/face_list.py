@@ -38,8 +38,8 @@ def add_face(image, face_list_id, user_data=None, target_face=None):
         'targetFace': target_face,
     }
 
-    return util.request('POST', url, headers=headers, params=params, json=json,
-                        data=data)
+    return util.request(
+        'POST', url, headers=headers, params=params, json=json, data=data)
 
 
 def create(face_list_id, name=None, user_data=None):
@@ -57,7 +57,7 @@ def create(face_list_id, name=None, user_data=None):
     Returns:
         An empty response body.
     """
-    name = face_list_id if name is None else name
+    name = name or face_list_id
     url = 'facelists/{}'.format(face_list_id)
     json = {
         'name': name,
@@ -68,23 +68,22 @@ def create(face_list_id, name=None, user_data=None):
 
 
 def delete_face(face_list_id, persisted_face_id):
-    """Delete an existing face from a face list (given by a
-    `persisited_face_id` and a `face_list_id`). Persisted image related to the
-    face will also be deleted.
+    """Delete an existing face from a face list (given by a `persisted_face_id`
+    and a `face_list_id`). Persisted image related to the face will also be
+    deleted.
 
     Args:
         face_list_id: Valid character is letter in lower case or digit or '-'
             or '_', maximum length is 64.
-        persisited_face_id: `persisited_face_id` of an existing face. Valid
+        persisted_face_id: `persisted_face_id` of an existing face. Valid
             character is letter in lower case or digit or '-' or '_', maximum
             length is 64.
 
     Returns:
         An empty response body.
     """
-    url = 'facelists/{}/persistedFaces/{}'.format(
-        face_list_id, persisted_face_id
-    )
+    url = 'facelists/{}/persistedFaces/{}'.format(face_list_id,
+                                                  persisted_face_id)
 
     return util.request('DELETE', url)
 

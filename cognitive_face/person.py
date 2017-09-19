@@ -7,7 +7,10 @@ Description: Person section of the Cognitive Face API.
 from . import util
 
 
-def add_face(image, person_group_id, person_id, user_data=None,
+def add_face(image,
+             person_group_id,
+             person_id,
+             user_data=None,
              target_face=None):
     """Add a representative face to a person for identification. The input face
     is specified as an image with a `target_face` rectangle. It returns a
@@ -40,8 +43,8 @@ def add_face(image, person_group_id, person_id, user_data=None,
         'targetFace': target_face,
     }
 
-    return util.request('POST', url, headers=headers, params=params, json=json,
-                        data=data)
+    return util.request(
+        'POST', url, headers=headers, params=params, json=json, data=data)
 
 
 def create(person_group_id, name, user_data=None):
@@ -100,8 +103,7 @@ def delete_face(person_group_id, person_id, persisted_face_id):
         An empty response body.
     """
     url = 'persongroups/{}/persons/{}/persistedFaces/{}'.format(
-        person_group_id, person_id, persisted_face_id
-    )
+        person_group_id, person_id, persisted_face_id)
 
     return util.request('DELETE', url)
 
@@ -139,8 +141,7 @@ def get_face(person_group_id, person_id, persisted_face_id):
         `user_data`).
     """
     url = 'persongroups/{}/persons/{}/persistedFaces/{}'.format(
-        person_group_id, person_id, persisted_face_id
-    )
+        person_group_id, person_id, persisted_face_id)
 
     return util.request('GET', url)
 
@@ -148,7 +149,7 @@ def get_face(person_group_id, person_id, persisted_face_id):
 def lists(person_group_id, start=None, top=None):
     """List `top` persons in a person group with `person_id` greater than
     `start`, and retrieve person information (including `person_id`, `name`,
-    `user_data` and `persisited_face_ids` of registered faces of the person).
+    `user_data` and `persisted_face_ids` of registered faces of the person).
 
     Args:
         person_group_id: `person_group_id` of the target person group.
@@ -207,8 +208,7 @@ def update_face(person_group_id, person_id, persisted_face_id, user_data=None):
         An empty response body.
     """
     url = 'persongroups/{}/persons/{}/persistedFaces/{}'.format(
-        person_group_id, person_id, persisted_face_id
-    )
+        person_group_id, person_id, persisted_face_id)
     json = {
         'userData': user_data,
     }

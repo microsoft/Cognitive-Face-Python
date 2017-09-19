@@ -26,11 +26,13 @@ def setUpModule():
     - Set Base URL.
     - Setup needed data for unitests.
     """
+    print("setUpModule Begin.")
     CF.Key.set(config.KEY)
     CF.BaseUrl.set(config.BASE_URL)
     util.DataStore.setup_person_group()
     util.DataStore.setup_face_list()
     util.DataStore.setup_face()
+    print("setUpModule End.")
 
 
 def tearDownModule():
@@ -39,5 +41,7 @@ def tearDownModule():
 
     - Remove all the created persisted data.
     """
+    print("tearDownModule Begin.")
     CF.util.clear_face_lists()
     CF.util.clear_person_groups()
+    print("tearDownModule End.")

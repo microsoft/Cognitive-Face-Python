@@ -22,7 +22,7 @@ def create(person_group_id, name=None, user_data=None):
     Returns:
         An empty response body.
     """
-    name = person_group_id if name is None else name
+    name = name or person_group_id
     url = 'persongroups/{}'.format(person_group_id)
     json = {
         'name': name,

@@ -24,6 +24,7 @@ class CognitiveFaceException(Exception):
         code: error code.
         msg: error message.
     """
+
     def __init__(self, status_code, code, msg):
         super(CognitiveFaceException, self).__init__()
         self.status_code = status_code
@@ -31,12 +32,11 @@ class CognitiveFaceException(Exception):
         self.msg = msg
 
     def __str__(self):
-        return (
-            'Error when calling Cognitive Face API:\n'
-            '\tstatus_code: {}\n'
-            '\tcode: {}\n'
-            '\tmessage: {}\n'
-        ).format(self.status_code, self.code, self.msg)
+        return ('Error when calling Cognitive Face API:\n'
+                '\tstatus_code: {}\n'
+                '\tcode: {}\n'
+                '\tmessage: {}\n').format(self.status_code, self.code,
+                                          self.msg)
 
 
 class Key(object):
@@ -56,7 +56,6 @@ class Key(object):
 
 
 class BaseUrl(object):
-
     @classmethod
     def set(cls, base_url):
         cls.base_url = base_url
@@ -82,8 +81,8 @@ def request(method, url, data=None, json=None, headers=None, params=None):
         headers['Content-Type'] = 'application/json'
     headers['Ocp-Apim-Subscription-Key'] = Key.get()
 
-    response = requests.request(method, url, params=params, data=data,
-                                json=json, headers=headers)
+    response = requests.request(
+        method, url, params=params, data=data, json=json, headers=headers)
 
     # Handle result and raise custom exception when something wrong.
     result = None
@@ -92,14 +91,11 @@ def request(method, url, data=None, json=None, headers=None, params=None):
         try:
             error_msg = response.json()['error']
         except:
-            raise CognitiveFaceException(
-                response.status_code,
-                response.status_code,
-                response.text)
-        raise CognitiveFaceException(
-            response.status_code,
-            error_msg.get('code'),
-            error_msg.get('message'))
+            raise CognitiveFaceException(response.status_code,
+                                         response.status_code, response.text)
+        raise CognitiveFaceException(response.status_code,
+                                     error_msg.get('code'),
+                                     error_msg.get('message'))
 
     # Prevent `response.json()` complains about empty response.
     if response.text:

@@ -37,12 +37,15 @@ def detect(image, face_id=True, landmarks=False, attributes=''):
         'returnFaceAttributes': attributes,
     }
 
-    return util.request('POST', url, headers=headers, params=params, json=json,
-                        data=data)
+    return util.request(
+        'POST', url, headers=headers, params=params, json=json, data=data)
 
 
-def find_similars(face_id, face_list_id=None, face_ids=None,
-                  max_candidates_return=20, mode='matchPerson'):
+def find_similars(face_id,
+                  face_list_id=None,
+                  face_ids=None,
+                  max_candidates_return=20,
+                  mode='matchPerson'):
     """Given query face's `face_id`, to search the similar-looking faces from a
     `face_id` array or a `face_list_id`.
 
@@ -100,7 +103,9 @@ def group(face_ids):
     return util.request('POST', url, json=json)
 
 
-def identify(face_ids, person_group_id, max_candidates_return=1,
+def identify(face_ids,
+             person_group_id,
+             max_candidates_return=1,
              threshold=None):
     """Identify unknown faces from a person group.
 

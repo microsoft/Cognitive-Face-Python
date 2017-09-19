@@ -26,11 +26,11 @@ class TestFaceList(unittest.TestCase):
         self.assertIsInstance(res, dict)
         util.wait()
 
-        persisited_face_id = res['persistedFaceId']
+        persisted_face_id = res['persistedFaceId']
 
         res = CF.face_list.delete_face(
             util.DataStore.face_list_id,
-            persisited_face_id,
+            persisted_face_id,
         )
         print(res)
         self.assertIsInstance(res, dict)

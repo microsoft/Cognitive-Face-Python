@@ -37,5 +37,4 @@ setup(
         'Topic :: Scientific/Engineering :: Image Recognition',
     ],
     test_suite='nose.collector',
-    tests_require=['nose'],
-)
+    tests_require=['nose'])

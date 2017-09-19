@@ -31,12 +31,12 @@ class TestPerson(unittest.TestCase):
         self.assertIsInstance(res, dict)
         util.wait()
 
-        persisited_face_id = res['persistedFaceId']
+        persisted_face_id = res['persistedFaceId']
 
         res = CF.person.update_face(
             util.DataStore.person_group_id,
             util.DataStore.person_id['Dad'],
-            persisited_face_id,
+            persisted_face_id,
             'TempUserData',
         )
         print(res)
@@ -46,7 +46,7 @@ class TestPerson(unittest.TestCase):
         res = CF.person.delete_face(
             util.DataStore.person_group_id,
             util.DataStore.person_id['Dad'],
-            persisited_face_id,
+            persisted_face_id,
         )
         print(res)
         self.assertIsInstance(res, dict)

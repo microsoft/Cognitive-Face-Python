@@ -149,7 +149,7 @@ def get_face(person_group_id, person_id, persisted_face_id):
 def lists(person_group_id, start=None, top=None):
     """List `top` persons in a person group with `person_id` greater than
     `start`, and retrieve person information (including `person_id`, `name`,
-    `user_data` and `persisited_face_ids` of registered faces of the person).
+    `user_data` and `persisted_face_ids` of registered faces of the person).
 
     Args:
         person_group_id: `person_group_id` of the target person group.

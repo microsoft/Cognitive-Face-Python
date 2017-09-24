@@ -65,7 +65,7 @@ python setup.py install
 
 To run the tests you will need a valid subscription. You can get one [here](https://azure.microsoft.com/en-gb/try/cognitive-services/?api=face-api).
 
-1. Copy `tests/config.sample.py`  into `tests/config.py`.
+1. Copy `cognitive_face/tests/config.sample.py`  into `cognitive_face/tests/config.py`.
 1. Change the `KEY` and `BASE_URL` parameters to your own subscription's API key and endpoint.
 1.  Run the following:
 

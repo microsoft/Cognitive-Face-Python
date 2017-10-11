@@ -20,7 +20,6 @@ except ImportError:
     sys.path.insert(0, ROOT_DIR)
     import cognitive_face as CF
 
-
 IMAGE_WILDCARD = 'Image files (*.jpg, *.png)|*.jpg; *.png'
 INNER_PANEL_WIDTH = 710
 MAX_IMAGE_SIZE = 300
@@ -32,17 +31,14 @@ ORIENTATION_TAG = 274
 
 LOG_FACE_LIST_REQUEST = (
     'Request: Face List {} will be used for build person database. '
-    'Checking whether group exists.'
-)
+    'Checking whether group exists.')
 LOG_FACE_LIST_NOT_EXIST = 'Response: Face List {} does not exist before.'
 LOG_FACE_LIST_EXIST = 'Response: Face List {} exists.'
-LABEL_FACE = (
-    '{}, {} years old\n'
-    'Hair: {}, Facial Hair: {}\n'
-    'Makeup: {}, Emotion: {}\n'
-    'Occluded: {}, Exposure: {}\n'
-    '{}\n{}\n'
-)
+LABEL_FACE = ('{}, {} years old\n'
+              'Hair: {}, Facial Hair: {}\n'
+              'Makeup: {}, Emotion: {}\n'
+              'Occluded: {}, Exposure: {}\n'
+              '{}\n{}\n')
 
 
 class SubscriptionKey(object):
@@ -67,7 +63,7 @@ class SubscriptionKey(object):
         """Set the subscription key."""
         cls.key = key
         with file(SUBSCRIPTION_KEY_FILENAME, 'w') as fout:
-            print >>fout, key
+            print >> fout, key
         CF.Key.set(cls.key)
 
     @classmethod
@@ -101,7 +97,7 @@ class Endpoint(object):
         """Set the endpoint."""
         cls.endpoint = endpoint
         with file(ENDPOINT_FILENAME, 'w') as fout:
-            print >>fout, endpoint
+            print >> fout, endpoint
         CF.BaseUrl.set(cls.endpoint)
 
     @classmethod
@@ -151,21 +147,16 @@ def draw_bitmap_rectangle(bitmap, faces):
     dc.SetTextBackground('black')
     dc.SetTextForeground('white')
     dc.SetBackgroundMode(wx.SOLID)
-    dc.SetFont(wx.Font(8,
-                       wx.FONTFAMILY_DEFAULT,
-                       wx.FONTSTYLE_NORMAL,
-                       wx.FONTWEIGHT_BOLD))
+    dc.SetFont(
+        wx.Font(8, wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL,
+                wx.FONTWEIGHT_BOLD))
     for face in faces:
         dc.DrawRectangle(
-            face.rect.left * bitmap.scale,
-            face.rect.top * bitmap.scale,
-            face.rect.width * bitmap.scale,
-            face.rect.height * bitmap.scale,
-        )
+            face.rect.left * bitmap.scale, face.rect.top * bitmap.scale,
+            face.rect.width * bitmap.scale, face.rect.height * bitmap.scale)
         if face.name:
             text_width, text_height = dc.GetTextExtent(face.name)
-            dc.DrawText(face.name,
-                        face.rect.left * bitmap.scale,
+            dc.DrawText(face.name, face.rect.left * bitmap.scale,
                         face.rect.top * bitmap.scale - text_height)
     dc.SelectObject(wx.NullBitmap)
     bitmap.bitmap.SetBitmap(bitmap.bmp)
@@ -185,8 +176,10 @@ def key_with_max_value(item):
 
 def async(func):
     """Async wrapper."""
+
     def wrapper(*args, **kwargs):
         """docstring for wrapper"""
         thr = Thread(target=func, args=args, kwargs=kwargs)
         thr.start()
+
     return wrapper

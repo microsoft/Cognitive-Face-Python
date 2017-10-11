@@ -14,6 +14,7 @@ from view import base
 
 class DetectionPanel(base.MyPanel):
     """Detection Panel."""
+
     def __init__(self, parent):
         super(DetectionPanel, self).__init__(parent)
 
@@ -25,12 +26,10 @@ class DetectionPanel(base.MyPanel):
         self.hvsizer = wx.BoxSizer(wx.VERTICAL)
         self.hvsizer.SetMinSize((util.INNER_PANEL_WIDTH, -1))
 
-        label = (
-            "To detect faces in an image, click the 'Choose Image' "
-            "button. You will see a rectangle surrounding every face "
-            "that the Face API detects. You will also see a list of "
-            "attributes related to the faces."
-        )
+        label = ("To detect faces in an image, click the 'Choose Image' "
+                 "button. You will see a rectangle surrounding every face "
+                 "that the Face API detects. You will also see a list of "
+                 "attributes related to the faces.")
         self.static_text = wx.StaticText(self, label=label)
         self.static_text.Wrap(util.INNER_PANEL_WIDTH)
         self.hvsizer.Add(self.static_text, 0, wx.ALL, 5)
@@ -102,8 +101,7 @@ class DetectionPanel(base.MyPanel):
         try:
             attributes = (
                 'age,gender,headPose,smile,facialHair,glasses,emotion,hair,'
-                'makeup,occlusion,accessories,blur,exposure,noise'
-            )
+                'makeup,occlusion,accessories,blur,exposure,noise')
             res = util.CF.face.detect(path, False, False, attributes)
             faces = [model.Face(face, path) for face in res]
             self.face_list.SetItems(faces)

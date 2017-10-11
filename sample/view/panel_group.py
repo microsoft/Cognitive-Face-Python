@@ -17,6 +17,7 @@ from view import base
 
 class GroupPanel(base.MyPanel):
     """Group Panel."""
+
     def __init__(self, parent):
         super(GroupPanel, self).__init__(parent)
 
@@ -33,12 +34,10 @@ class GroupPanel(base.MyPanel):
         self.hvsizer = wx.BoxSizer(wx.VERTICAL)
         self.hvsizer.SetMinSize((util.INNER_PANEL_WIDTH, -1))
 
-        label = (
-            'Click the button below to select a folder containing face '
-            'images.\nThe images will be grouped based on similarity.\n'
-            'You will see the different groups under the '
-            '"Grouping Results" label.'
-        )
+        label = ('Click the button below to select a folder containing face '
+                 'images.\nThe images will be grouped based on similarity.\n'
+                 'You will see the different groups under the "Grouping '
+                 'Results" label.')
         self.static_text = wx.StaticText(self.panel, label=label)
         self.static_text.Wrap(util.INNER_PANEL_WIDTH)
         self.hvsizer.Add(self.static_text, 0, wx.ALL, 0)
@@ -97,17 +96,14 @@ class GroupPanel(base.MyPanel):
             self.faces.clear()
             for root, dirs, files in os.walk(path):
                 if files:
-                    self.face_paths.extend([
-                        os.path.join(root, filename)
-                        for filename in files
-                    ])
+                    self.face_paths.extend(
+                        [os.path.join(root, filename) for filename in files])
 
             self.btn.Disable()
 
-            self.log.log(
+            self.log.log((
                 'Request: Preparing faces for grouping, detecting faces in '
-                'chosen folder.'
-            )
+                'chosen folder.'))
             self.grid.set_paths(self.face_paths)
             for path in self.face_paths:
                 try:
@@ -118,12 +114,11 @@ class GroupPanel(base.MyPanel):
                     face = model.Face(entry, path)
                     self.faces[face.id] = face
             self.grid.set_faces(self.faces.values())
-            self.log.log(
-                'Response: Success. Total {0} faces are detected.'.format(
-                    len(self.faces)))
+            self.log.log('Response: Success. Total {0} faces are detected.'.
+                         format(len(self.faces)))
 
-            self.log.log('Request: Grouping {0} faces.'.format(
-                len(self.faces)))
+            self.log.log(
+                'Request: Grouping {0} faces.'.format(len(self.faces)))
             res = util.CF.face.group(self.faces.keys())
             self.result.set_data(self.faces, res)
             len_groups = len(res['groups'])

@@ -14,6 +14,7 @@ from view.base import MyPanel
 
 class SubscriptionPanel(MyPanel):
     """Subscription Panel."""
+
     def __init__(self, parent):
         super(SubscriptionPanel, self).__init__(parent)
 
@@ -25,8 +26,7 @@ class SubscriptionPanel(MyPanel):
             'Speech, etc.) has its own subscription keys.\nAnd each '
             'subscription key belongs to one specific endpoint.\nYou can use '
             'the link below to get a key.\nWhen ready, paste your key '
-            'into the textbox below.'
-        )
+            'into the textbox below.')
         style = wx.ALIGN_LEFT | wx.ST_ELLIPSIZE_END
         self.static_text = wx.StaticText(self, label=label, style=style)
         self.sizer.Add(self.static_text, flag=wx.EXPAND | wx.ALL, border=5)
@@ -87,12 +87,10 @@ class SubscriptionPanel(MyPanel):
         """Save the key and endpoint."""
         util.SubscriptionKey.set(
             self.subscription_key_text.GetValue().encode('utf-8'))
-        util.Endpoint.set(
-            self.endpoint_text.GetValue().encode('utf-8'))
+        util.Endpoint.set(self.endpoint_text.GetValue().encode('utf-8'))
         text = (
-            'Settings successfully saved on your disk.\n'
-            'You do not need to paste the key next time.'
-        )
+            'Settings successfully saved on your disk.\nYou do not need to '
+            'paste the key next time.')
         title = 'Settings'
         style = wx.OK | wx.ICON_INFORMATION
         wx.MessageBox(text, title, style)

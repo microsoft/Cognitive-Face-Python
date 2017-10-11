@@ -24,6 +24,7 @@ TITLE = u"Microsoft Cognitive Services Face Samples"
 
 class MyLabelBook(LB.LabelBook):
     """LabelBook part in Main Frame."""
+
     def __init__(self, parent):
         agw_style = INB_LEFT | INB_FIT_LABELTEXT | INB_NO_RESIZE
         super(MyLabelBook, self).__init__(parent, agwStyle=agw_style)
@@ -44,6 +45,7 @@ class MyLabelBook(LB.LabelBook):
 
 class MyTitle(wx.Panel):
     """Title part in Main Frame."""
+
     def __init__(self, parent):
         super(MyTitle, self).__init__(parent)
         self.SetBackgroundColour('#00b294')
@@ -66,6 +68,7 @@ class MyTitle(wx.Panel):
 
 class MyFrame(wx.Frame):
     """Main Frame."""
+
     def __init__(self, parent):
         super(MyFrame, self).__init__(parent, title=TITLE, size=(1280, 768))
 
@@ -83,8 +86,7 @@ class MyFrame(wx.Frame):
         status_text = (
             'Microsoft will receive the images you upload and may use them to '
             'improve Face API and related services. By submitting an image, '
-            'you confirm you have consent from everyone in it.'
-        )
+            'you confirm you have consent from everyone in it.')
         self.status = wx.StatusBar(self)
         self.status.SetStatusText(status_text)
         sizer.Add(self.status, flag=wx.EXPAND)
@@ -95,6 +97,7 @@ class MyFrame(wx.Frame):
 
 class MyApp(wx.App):
     """The whole app."""
+
     def OnInit(self):
         """Show main frame."""
         frame = MyFrame(None)

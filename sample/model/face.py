@@ -11,6 +11,7 @@ import util
 
 class Rect(object):
     """Face Rectangle."""
+
     def __init__(self, rect):
         super(Rect, self).__init__()
         self.set_rect(rect)
@@ -25,6 +26,7 @@ class Rect(object):
 
 class Attribute(object):
     """Attributes for face."""
+
     def __init__(self, attr):
         super(Attribute, self).__init__()
         self.set_attr(attr)
@@ -41,8 +43,7 @@ class Attribute(object):
         else:
             self.hair = max(
                 attr['hair']['hairColor'],
-                key=lambda x: x['confidence']
-            )['color']
+                key=lambda x: x['confidence'])['color']
         self.facial_hair = sum(attr['facialHair'].values()) > 0 and 'Yes' \
             or 'No'
         self.makeup = any(attr['makeup'].values())
@@ -50,20 +51,18 @@ class Attribute(object):
         self.occlusion = any(attr['occlusion'].values())
         self.exposure = attr['exposure']['exposureLevel']
         self.head_pose = "Pitch: {}, Roll:{}, Yaw:{}".format(
-            attr['headPose']['pitch'],
-            attr['headPose']['roll'],
-            attr['headPose']['yaw']
-        )
+            attr['headPose']['pitch'], attr['headPose']['roll'],
+            attr['headPose']['yaw'])
         if not attr['accessories']:
             self.accessories = 'NoAccessories'
         else:
             self.accessories = ' '.join(
-                [str(x['type']) for x in attr['accessories']]
-            )
+                [str(x['type']) for x in attr['accessories']])
 
 
 class Face(object):
     """Face Model for each face."""
+
     def __init__(self, res, path, size=util.MAX_THUMBNAIL_SIZE):
         super(Face, self).__init__()
         self.path = path
@@ -76,18 +75,13 @@ class Face(object):
             self.persisted_id = res['persistedFaceId']
         if res.get('faceRectangle'):
             self.rect = Rect(res['faceRectangle'])
-            self.bmp = self.bmp.GetSubBitmap(wx.Rect(
-                self.rect.left,
-                self.rect.top,
-                self.rect.width,
-                self.rect.height,
-            ))
+            self.bmp = self.bmp.GetSubBitmap(
+                wx.Rect(self.rect.left, self.rect.top, self.rect.width,
+                        self.rect.height))
         if res.get('faceAttributes'):
             self.attr = Attribute(res['faceAttributes'])
         self.bmp = util.scale_image(
-            self.bmp.ConvertToImage(),
-            size=size,
-        ).ConvertToBitmap()
+            self.bmp.ConvertToImage(), size=size).ConvertToBitmap()
 
     def set_name(self, name):
         """Set the name for the face."""

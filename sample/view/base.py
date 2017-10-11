@@ -13,6 +13,7 @@ import util
 
 class MyPanel(wx.Panel):
     """Base Panel."""
+
     def __init__(self, parent):
         super(MyPanel, self).__init__(parent)
         colour_window = wx.SystemSettings.GetColour(wx.SYS_COLOUR_WINDOW)
@@ -21,6 +22,7 @@ class MyPanel(wx.Panel):
 
 class MyStaticBitmap(MyPanel):
     """Base StaticBitmap."""
+
     def __init__(self, parent, bitmap=wx.NullBitmap, size=util.MAX_IMAGE_SIZE):
         super(MyStaticBitmap, self).__init__(parent)
         self.bmp = bitmap
@@ -49,7 +51,13 @@ class MyStaticBitmap(MyPanel):
 
 class MyGridStaticBitmap(wx.Panel):
     """Base Grid StaticBitmap."""
-    def __init__(self, parent, rows=1, cols=0, vgap=0, hgap=0,
+
+    def __init__(self,
+                 parent,
+                 rows=1,
+                 cols=0,
+                 vgap=0,
+                 hgap=0,
                  size=util.MAX_THUMBNAIL_SIZE):
         super(MyGridStaticBitmap, self).__init__(parent)
         self.sizer = wx.GridSizer(rows, cols, vgap, hgap)
@@ -78,6 +86,7 @@ class MyGridStaticBitmap(wx.Panel):
 
 class WrapCaptionFaceList(wx.WrapSizer):
     """Wrap face list with caption under the face."""
+
     def __init__(self, parent, confidence_faces, size=util.MAX_THUMBNAIL_SIZE):
         super(WrapCaptionFaceList, self).__init__()
         for face, confidence in confidence_faces:
@@ -96,6 +105,7 @@ class WrapCaptionFaceList(wx.WrapSizer):
 
 class FindSimilarsResult(wx.Panel):
     """The view for Find Similar result."""
+
     def __init__(self, parent):
         super(FindSimilarsResult, self).__init__(parent)
         self.sizer = wx.BoxSizer(wx.VERTICAL)
@@ -104,7 +114,8 @@ class FindSimilarsResult(wx.Panel):
         """Set the data."""
         self.sizer.Clear(True)
         static_text_title = wx.StaticText(
-            self, label='Find {} Similar Candidate Faces Results:'.format(
+            self,
+            label='Find {} Similar Candidate Faces Results:'.format(
                 len(faces)))
         self.sizer.Add(static_text_title, 0, wx.EXPAND)
 
@@ -133,6 +144,7 @@ class FindSimilarsResult(wx.Panel):
 
 class WrapFaceList(wx.Panel):
     """Base wrap face list."""
+
     def __init__(self, parent, faces, size=util.MAX_THUMBNAIL_SIZE):
         super(WrapFaceList, self).__init__(parent)
         self.sizer = wx.WrapSizer()
@@ -146,6 +158,7 @@ class WrapFaceList(wx.Panel):
 
 class CaptionWrapFaceList(wx.Panel):
     """Wrap face list with a caption."""
+
     def __init__(self, parent):
         super(CaptionWrapFaceList, self).__init__(parent)
         self.sizer = wx.BoxSizer(wx.VERTICAL)
@@ -165,6 +178,7 @@ class CaptionWrapFaceList(wx.Panel):
 
 class GroupResult(wx.Panel):
     """The view for Group result."""
+
     def __init__(self, parent):
         super(GroupResult, self).__init__(parent)
         self.sizer = wx.BoxSizer(wx.VERTICAL)
@@ -195,6 +209,7 @@ class GroupResult(wx.Panel):
 
 class MyLog(wx.TextCtrl):
     """The window for each scenario."""
+
     def __init__(self, parent):
         style = wx.TE_MULTILINE | wx.TE_READONLY
         super(MyLog, self).__init__(parent, style=style)
@@ -210,6 +225,7 @@ class MyLog(wx.TextCtrl):
 
 class MyFaceList(wx.VListBox):
     """Face List."""
+
     def __init__(self, parent, faces=[], **kwargs):
         super(MyFaceList, self).__init__(parent, **kwargs)
         self.SetItems(faces)
@@ -230,17 +246,10 @@ class MyFaceList(wx.VListBox):
         textx = rect.x + 2 + face.bmp.GetWidth() + 2
         label_rect = wx.Rect(textx, rect.y, rect.width - textx, rect.height)
         label = util.LABEL_FACE.format(
-            face.attr.gender,
-            face.attr.age,
-            face.attr.hair,
-            face.attr.facial_hair,
-            face.attr.makeup,
-            face.attr.emotion,
-            face.attr.occlusion,
-            face.attr.exposure,
-            face.attr.head_pose,
-            face.attr.accessories
-        )
+            face.attr.gender, face.attr.age, face.attr.hair,
+            face.attr.facial_hair, face.attr.makeup, face.attr.emotion,
+            face.attr.occlusion, face.attr.exposure, face.attr.head_pose,
+            face.attr.accessories)
         dc.DrawLabel(label, label_rect, wx.ALIGN_LEFT | wx.ALIGN_TOP)
 
     def SetItems(self, faces):

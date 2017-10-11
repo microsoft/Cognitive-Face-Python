@@ -18,6 +18,7 @@ from view import base
 
 class VerificationPanel(base.MyPanel):
     """Verification Panel."""
+
     def __init__(self, parent):
         super(VerificationPanel, self).__init__(parent)
 
@@ -26,7 +27,7 @@ class VerificationPanel(base.MyPanel):
             'another_face_id': None,
             'person_face_id': None,
         }
-        self.person_group_id = str(uuid.uuid1())
+        self.large_person_group_id = str(uuid.uuid1())
         self.person_name = None
         self.person_id = None
         self.face_paths = []
@@ -42,12 +43,10 @@ class VerificationPanel(base.MyPanel):
         self.hvsizer = wx.BoxSizer(wx.VERTICAL)
         self.hvsizer.SetMinSize((util.INNER_PANEL_WIDTH, -1))
 
-        label = (
-            "Demo 1: Face-to-face verification determines whether "
-            "two faces belong to the same person. Choose two images "
-            "with a single face each. Then click 'Verify' to get "
-            "the verification result."
-        )
+        label = ("Demo 1: Face-to-face verification determines whether "
+                 "two faces belong to the same person. Choose two images "
+                 "with a single face each. Then click 'Verify' to get "
+                 "the verification result.")
         self.static_text = wx.StaticText(self.panel, label=label)
         self.static_text.Wrap(util.INNER_PANEL_WIDTH)
         self.hvsizer.Add(self.static_text, 0, wx.ALL, 0)
@@ -68,7 +67,8 @@ class VerificationPanel(base.MyPanel):
         self.btn_face2face_1.Bind(
             wx.EVT_BUTTON,
             lambda evt: self.OnChooseImage(
-                evt, self.bitmap_face2face_1, 'face_id'))
+                evt, self.bitmap_face2face_1, 'face_id')
+        )
 
         self.vhsizer1.Add(self.lsizer1, 1, wx.EXPAND)
 
@@ -101,20 +101,19 @@ class VerificationPanel(base.MyPanel):
         self.btn_face2face_2.Bind(
             wx.EVT_BUTTON,
             lambda evt: self.OnChooseImage(
-                evt, self.bitmap_face2face_2, 'another_face_id'))
+                evt, self.bitmap_face2face_2, 'another_face_id')
+        )
 
         self.vhsizer1.Add(self.rsizer1, 1, wx.EXPAND)
 
         self.hvsizer.Add(self.vhsizer1)
 
-        label = (
-            "Demo 2: Face-to-person verification determines whether a "
-            "face belongs to a given person. Click 'Load Person' to "
-            "pick a folder containing the images of one person's face. "
-            "Next, click 'Choose Image' to pick a face image of the "
-            "same person (or of a different person). Finally, click "
-            "'Verify' to see the verification result."
-        )
+        label = ("Demo 2: Face-to-person verification determines whether a "
+                 "face belongs to a given person. Click 'Load Person' to "
+                 "pick a folder containing the images of one person's face. "
+                 "Next, click 'Choose Image' to pick a face image of the "
+                 "same person (or of a different person). Finally, click "
+                 "'Verify' to see the verification result.")
         self.static_text = wx.StaticText(self.panel, label=label)
         self.static_text.Wrap(util.INNER_PANEL_WIDTH)
         self.hvsizer.Add(self.static_text, 0, wx.ALL, 0)
@@ -164,7 +163,8 @@ class VerificationPanel(base.MyPanel):
         self.btn_face2person_2.Bind(
             wx.EVT_BUTTON,
             lambda evt: self.OnChooseImage(
-                evt, self.bitmap_face2person, 'person_face_id'))
+                evt, self.bitmap_face2person, 'person_face_id')
+        )
 
         self.vhsizer2.Add(self.rsizer2, 1, wx.EXPAND)
 
@@ -203,9 +203,8 @@ class VerificationPanel(base.MyPanel):
 
         if len(faces) > 1:
             text = (
-                'Verification accepts two faces as input, please pick images'
-                'with only one detectable face in it.'
-            )
+                'Verification accepts two faces as input, please pick images '
+                'with only one detectable face in it.')
             title = 'Warning'
             style = wx.OK | wx.ICON_WARNING
             wx.MessageBox(text, title, style)
@@ -220,33 +219,33 @@ class VerificationPanel(base.MyPanel):
         """Choose Folder."""
         self.log.log((
             'Request: Group {0} will be used to build a person database. '
-            'Checking whether the group exists.'
-        ).format(self.person_group_id))
+            'Checking whether the group exists.').format(
+                self.large_person_group_id))
         try:
-            util.CF.person_group.get(self.person_group_id)
-            self.log.log('Response: Group {0} exists.'.format(
-                self.person_group_id))
+            util.CF.large_person_group.get(self.large_person_group_id)
+            self.log.log(
+                'Response: Group {0} exists.'.format(
+                    self.large_person_group_id))
             text = (
-                'Requires a clean up for group "{0}" before setting up a '
-                'new person database. Click YES to proceed, group "{0}" '
-                'will be cleared.'
-            ).format(self.person_group_id)
+                'Requires a clean up for group "{0}" before setting up a new '
+                'person database. Click YES to proceed, group "{0}" will be '
+                'cleared.').format(self.large_person_group_id)
             title = 'Warning'
             style = wx.YES_NO | wx.ICON_WARNING
             result = wx.MessageBox(text, title, style)
             if result == wx.YES:
-                util.CF.person_group.delete(self.person_group_id)
+                util.CF.large_person_group.delete(self.large_person_group_id)
+                self.large_person_group_id = str(uuid.uuid1())
                 self.person_id = None
             else:
                 return
         except util.CF.CognitiveFaceException as exp:
-            if exp.code != 'PersonGroupNotFound':
+            if exp.code != 'LargePersonGroupNotFound':
                 self.log.log('Response: {}. {}'.format(exp.code, exp.msg))
                 return
             else:
-                self.log.log((
-                    'Response: Group {0} does not exist previously.'
-                ).format(self.person_group_id))
+                self.log.log('Response: Group {0} does not exist previously.'.
+                             format(self.large_person_group_id))
 
         dlg = wx.DirDialog(self)
         if dlg.ShowModal() == wx.ID_OK:
@@ -255,38 +254,35 @@ class VerificationPanel(base.MyPanel):
             del self.face_paths[:]
             for root, dirs, files in os.walk(path):
                 if files:
-                    self.face_paths.extend([
-                        os.path.join(root, filename)
-                        for filename in files
-                    ])
-            self.log.log('Request: Creating group "{0}"'.format(
-                self.person_group_id))
-            util.CF.person_group.create(self.person_group_id)
-            self.log.log('Response: Success. Group "{0}" created'.format(
-                self.person_group_id))
+                    self.face_paths.extend(
+                        [os.path.join(root, filename) for filename in files])
+            self.log.log(
+                'Request: Creating group "{0}"'.format(
+                    self.large_person_group_id))
+            util.CF.large_person_group.create(self.large_person_group_id)
+            self.log.log(
+                'Response: Success. Group "{0}" created'.format(
+                    self.large_person_group_id))
             self.log.log((
-                'Preparing person for verification, detecting faces in chosen '
-                'folder.'))
-            self.log.log('Request: Creating person "{0}"'.format(
-                self.person_name))
-            res = util.CF.person.create(self.person_group_id, self.person_name)
+                'Preparing person for verification, detecting faces in '
+                'chosen folder.'))
+            self.log.log(
+                'Request: Creating person "{0}"'.format(self.person_name))
+            res = util.CF.large_person_group_person.create(
+                self.large_person_group_id, self.person_name)
             self.person_id = res['personId']
-            self.log.log((
-                'Response: Success. Person "{0}" (PersonID:{1}) created'
-            ).format(
-                self.person_name, self.person_id
-            ))
+            self.log.log(
+                'Response: Success. Person "{0}" (PersonID:{1}) created'.
+                format(self.person_name, self.person_id))
             del self.detected_face_paths[:]
             for path in self.face_paths:
-                res = util.CF.person.add_face(path,
-                                              self.person_group_id,
-                                              self.person_id)
+                res = util.CF.large_person_group_person_face.add(
+                    path, self.large_person_group_id, self.person_id)
                 if res.get('persistedFaceId'):
                     self.detected_face_paths.append(path)
-            self.log.log((
-                'Response: Success. Total {0} faces are detected.'
-            ).format(len(self.detected_face_paths)))
-            res = util.CF.person_group.train(self.person_group_id)
+            self.log.log('Response: Success. Total {0} faces are detected.'.
+                         format(len(self.detected_face_paths)))
+            res = util.CF.large_person_group.train(self.large_person_group_id)
             self.grid.set_paths(self.detected_face_paths)
             self.panel.SetupScrolling(scroll_x=False)
             self.check_btn_verify()
@@ -301,56 +297,45 @@ class VerificationPanel(base.MyPanel):
             if res['isIdentical']:
                 self.log.log((
                     'Response: Success. Face {0} and {1} belong to the same '
-                    'person'
-                ).format(
-                    self.face_ids['face_id'],
-                    self.face_ids['another_face_id']
-                ))
+                    'person').format(
+                        self.face_ids['face_id'],
+                        self.face_ids['another_face_id']))
                 text = (
                     'Results: \nConfidence = {0}, two faces belong to the '
-                    'same person'
-                ).format(res['confidence'])
+                    'same person').format(res['confidence'])
             else:
                 self.log.log((
-                    'Response: Success. Face {0} and {1} do not belong to the '
-                    'same person'
-                ).format(
-                    self.face_ids['face_id'],
-                    self.face_ids['another_face_id']
-                ))
+                    'Response: Success. Face {0} and {1} do not belong to '
+                    'the same person').format(
+                        self.face_ids['face_id'],
+                        self.face_ids['another_face_id']))
                 text = (
                     'Results: \nConfidence = {0}, two faces do not belong to '
-                    'the same person'
-                ).format(res['confidence'])
+                    'the same person').format(res['confidence'])
         else:
-            util.CF.util.wait_for_training(self.person_group_id)
+            util.CF.util.wait_for_large_person_group_training(
+                self.large_person_group_id)
             self.log.log('Request: Verifying face {0} and person {1}'.format(
                 self.face_ids['person_face_id'], self.person_id))
-            res = util.CF.face.verify(self.face_ids['person_face_id'],
-                                      person_group_id=self.person_group_id,
-                                      person_id=self.person_id)
+            res = util.CF.face.verify(
+                self.face_ids['person_face_id'],
+                large_person_group_id=self.large_person_group_id,
+                person_id=self.person_id)
             if res['isIdentical']:
-                self.log.log((
-                    'Response: Success. Face {0} belongs to person {1}'
-                ).format(
-                    self.face_ids['person_face_id'],
-                    self.person_name
-                ))
+                self.log.log(
+                    'Response: Success. Face {0} belongs to person {1}'.format(
+                        self.face_ids['person_face_id'], self.person_name))
                 text = (
-                    'Results: \n'
-                    'Confidence = {0}, the face belongs to the person'
-                ).format(res['confidence'])
+                    'Results: \nConfidence = {0}, the face belongs to the '
+                    'person').format(res['confidence'])
             else:
                 self.log.log((
-                    'Response: Success. Face {0} does not belong to person {1}'
-                ).format(
-                    self.face_ids['person_face_id'],
-                    self.person_name
-                ))
+                    'Response: Success. Face {0} does not belong to person '
+                    '{1}').format(
+                        self.face_ids['person_face_id'], self.person_name))
                 text = (
-                    'Results: \nConfidence = {0}, the face does not belong to'
-                    'the person'
-                ).format(res['confidence'])
+                    'Results: \nConfidence = {0}, the face does not belong to '
+                    'the person').format(res['confidence'])
         result.SetLabelText(text)
         result.Wrap(88)
 

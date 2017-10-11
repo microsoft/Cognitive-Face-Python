@@ -43,14 +43,15 @@ def detect(image, face_id=True, landmarks=False, attributes=''):
 
 def find_similars(face_id,
                   face_list_id=None,
+                  large_face_list_id=None,
                   face_ids=None,
                   max_candidates_return=20,
                   mode='matchPerson'):
     """Given query face's `face_id`, to search the similar-looking faces from a
-    `face_id` array or a `face_list_id`.
+    `face_id` array, a `face_list_id` or a `large_face_list_id`.
 
-    Parameter `face_list_id` and `face_ids` should not be provided at the same
-    time.
+    Parameter `large_face_list_id`, `face_list_id` and `face_ids` should not be 
+    provided at the same time.
 
     Args:
         face_id: `face_id` of the query face. User needs to call `face.detect`
@@ -59,6 +60,10 @@ def find_similars(face_id,
         face_list_id: An existing user-specified unique candidate face list,
             created in `face_list.create`. Face list contains a set of
             `persisted_face_ids` which are persisted and will never expire.
+        large_face_list_id: An existing user-specified unique candidate face
+            list, created in `large_face_list.create`. Large Face list contains
+            a set of `persisted_face_ids` which are persisted and will never
+            expire.
         face_ids: An array of candidate `face_id`s. All of them are created by
             `face.detect` and the `face_id`s will expire in 24 hours after the
             detection call. The number of `face_id`s is limited to 1000.
@@ -70,12 +75,13 @@ def find_similars(face_id,
     Returns:
         An array of the most similar faces represented in `face_id` if the
         input parameter is `face_ids` or `persisted_face_id` if the input
-        parameter is `face_list_id`.
+        parameter is `face_list_id` or `large_face_list_id`.
     """
     url = 'findsimilars'
     json = {
         'faceId': face_id,
         'faceListId': face_list_id,
+        'largeFaceListId': large_face_list_id,
         'faceIds': face_ids,
         'maxNumOfCandidatesReturned': max_candidates_return,
         'mode': mode,
@@ -104,10 +110,11 @@ def group(face_ids):
 
 
 def identify(face_ids,
-             person_group_id,
+             person_group_id=None,
+             large_person_group_id=None,
              max_candidates_return=1,
              threshold=None):
-    """Identify unknown faces from a person group.
+    """Identify unknown faces from a person group or a large person group.
 
     Args:
         face_ids: An array of query `face_id`s, created by the `face.detect`.
@@ -115,6 +122,8 @@ def identify(face_ids,
             `face_ids` is between [1, 10].
         person_group_id: `person_group_id` of the target person group, created
             by `person_group.create`.
+        large_person_group_id: `large_person_group_id` of the target large
+            person group, createdJ by `large_person_group.create`.
         max_candidates_return: Optional parameter. The range of
             `max_candidates_return` is between 1 and 5 (default is 1).
         threshold: Optional parameter. Confidence threshold of identification,
@@ -127,6 +136,7 @@ def identify(face_ids,
     url = 'identify'
     json = {
         'personGroupId': person_group_id,
+        'largePersonGroupId': large_person_group_id,
         'faceIds': face_ids,
         'maxNumOfCandidatesReturned': max_candidates_return,
         'confidenceThreshold': threshold,
@@ -135,14 +145,17 @@ def identify(face_ids,
     return util.request('POST', url, json=json)
 
 
-def verify(face_id, another_face_id=None, person_group_id=None,
+def verify(face_id,
+           another_face_id=None,
+           person_group_id=None,
+           large_person_group_id=None,
            person_id=None):
     """Verify whether two faces belong to a same person or whether one face
     belongs to a person.
 
     For face to face verification, only `face_id` and `another_face_id` is
     necessary. For face to person verification, only `face_id`,
-    `person_group_id` and `person_id` is needed.
+    `person_group_id` (or `large_person_group_id`) and `person_id` is needed.
 
     Args:
         face_id: `face_id` of one face, comes from `face.detect`.
@@ -150,6 +163,9 @@ def verify(face_id, another_face_id=None, person_group_id=None,
         person_group_id: Using existing `person_group_id` and `person_id` for
             fast loading a specified person. `person_group_id` is created in
             `person_group.create`.
+        large_person_group_id: Using existing `large_person_group_id` and
+            `person_id` for fast loading a specified person.
+            `large_person_group_id` is created in `large_person_group.create`.
         person_id: Specify a certain person in a person group. `person_id` is
             created in `person.create`.
 
@@ -167,6 +183,7 @@ def verify(face_id, another_face_id=None, person_group_id=None,
         json.update({
             'faceId': face_id,
             'personGroupId': person_group_id,
+            'largePersonGroupId': large_person_group_id,
             'personId': person_id,
         })
 

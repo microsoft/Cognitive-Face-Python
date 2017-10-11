@@ -22,32 +22,24 @@ class TestPerson(unittest.TestCase):
         image = '{}PersonGroup/Family1-Dad/Family1-Dad3.jpg'.format(
             util.BASE_URL_IMAGE)
 
-        res = CF.person.add_face(
-            image,
-            util.DataStore.person_group_id,
-            util.DataStore.person_id['Dad'],
-        )
+        res = CF.person.add_face(image, util.DataStore.person_group_id,
+                                 util.DataStore.person_id['Dad'])
         print(res)
         self.assertIsInstance(res, dict)
         util.wait()
 
         persisted_face_id = res['persistedFaceId']
 
-        res = CF.person.update_face(
-            util.DataStore.person_group_id,
-            util.DataStore.person_id['Dad'],
-            persisted_face_id,
-            'TempUserData',
-        )
+        res = CF.person.update_face(util.DataStore.person_group_id,
+                                    util.DataStore.person_id['Dad'],
+                                    persisted_face_id, 'TempUserData')
         print(res)
         self.assertIsInstance(res, dict)
         util.wait()
 
-        res = CF.person.delete_face(
-            util.DataStore.person_group_id,
-            util.DataStore.person_id['Dad'],
-            persisted_face_id,
-        )
+        res = CF.person.delete_face(util.DataStore.person_group_id,
+                                    util.DataStore.person_id['Dad'],
+                                    persisted_face_id)
         print(res)
         self.assertIsInstance(res, dict)
         util.wait()
@@ -75,10 +67,8 @@ class TestPerson(unittest.TestCase):
 
     def test_get(self):
         """Unittest for `person.get`."""
-        res = CF.person.get(
-            util.DataStore.person_group_id,
-            util.DataStore.person_id['Dad'],
-        )
+        res = CF.person.get(util.DataStore.person_group_id,
+                            util.DataStore.person_id['Dad'])
         print(res)
         self.assertIsInstance(res, dict)
         util.wait()
@@ -86,10 +76,8 @@ class TestPerson(unittest.TestCase):
     def test_get_face(self):
         """Unittest for `person.get_face`."""
         res = CF.person.get_face(
-            util.DataStore.person_group_id,
-            util.DataStore.person_id['Dad'],
-            util.DataStore.person_persisted_face_id['Dad'][0],
-        )
+            util.DataStore.person_group_id, util.DataStore.person_id['Dad'],
+            util.DataStore.person_persisted_face_id['Dad'][0])
         print(res)
         self.assertIsInstance(res, dict)
         util.wait()

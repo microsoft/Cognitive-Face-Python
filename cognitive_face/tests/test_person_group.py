@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-File: person_group.py
+File: test_person_group.py
 Description: Unittests for Person Group section of the Cognitive Face API.
 """
 

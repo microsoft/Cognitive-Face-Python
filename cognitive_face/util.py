@@ -82,7 +82,13 @@ def request(method, url, data=None, json=None, headers=None, params=None):
     headers['Ocp-Apim-Subscription-Key'] = Key.get()
 
     response = requests.request(
-        method, url, params=params, data=data, json=json, headers=headers)
+        method,
+        url,
+        params=params,
+        data=data,
+        json=json,
+        headers=headers,
+        verify=False)
 
     # Handle result and raise custom exception when something wrong.
     result = None
@@ -133,8 +139,8 @@ def parse_image(image):
         return headers, None, json
 
 
-def wait_for_training(person_group_id):
-    """Wait for the finish of person_group training."""
+def wait_for_person_group_training(person_group_id):
+    """Wait for the finish of person group training."""
     idx = 1
     while True:
         res = CF.person_group.get_status(person_group_id)
@@ -142,6 +148,32 @@ def wait_for_training(person_group_id):
             break
         print('The training of Person Group {} is onging: #{}'.format(
             person_group_id, idx))
+        time.sleep(2**idx)
+        idx += 1
+
+
+def wait_for_large_face_list_training(large_face_list_id):
+    """Wait for the finish of large face list training."""
+    idx = 1
+    while True:
+        res = CF.large_face_list.get_status(large_face_list_id)
+        if res['status'] in ('succeeded', 'failed'):
+            break
+        print('The training of Large Face List {} is onging: #{}'.format(
+            large_face_list_id, idx))
+        time.sleep(2**idx)
+        idx += 1
+
+
+def wait_for_large_person_group_training(large_person_group_id):
+    """Wait for the finish of large person group training."""
+    idx = 1
+    while True:
+        res = CF.large_person_group.get_status(large_person_group_id)
+        if res['status'] in ('succeeded', 'failed'):
+            break
+        print('The training of Large Person Group {} is onging: #{}'.format(
+            large_person_group_id, idx))
         time.sleep(2**idx)
         idx += 1
 
@@ -158,7 +190,7 @@ def clear_face_lists():
 
 
 def clear_person_groups():
-    """[Dangerous] Clear all the person gourps and all related persisted data.
+    """[Dangerous] Clear all the person groups and all related persisted data.
     """
     person_groups = CF.person_group.lists()
     time.sleep(TIME_SLEEP)
@@ -166,4 +198,30 @@ def clear_person_groups():
         person_group_id = person_group['personGroupId']
         CF.person_group.delete(person_group_id)
         print('Deleting Person Group {}'.format(person_group_id))
+        time.sleep(TIME_SLEEP)
+
+
+def clear_large_face_lists():
+    """[Dangerous] Clear all the large face lists and all related persisted
+    data.
+    """
+    large_face_lists = CF.large_face_list.list()
+    time.sleep(TIME_SLEEP)
+    for large_face_list in large_face_lists:
+        large_face_list_id = large_face_list['largeFaceListId']
+        CF.large_face_list.delete(large_face_list_id)
+        print('Deleting Large Face List {}'.format(large_face_list_id))
+        time.sleep(TIME_SLEEP)
+
+
+def clear_large_person_groups():
+    """[Dangerous] Clear all the large person groups and all related persisted
+    data.
+    """
+    large_person_groups = CF.large_person_group.list()
+    time.sleep(TIME_SLEEP)
+    for large_person_group in large_person_groups:
+        large_person_group_id = large_person_group['largePersonGroupId']
+        CF.large_person_group.delete(large_person_group_id)
+        print('Deleting Large Person Group {}'.format(large_person_group_id))
         time.sleep(TIME_SLEEP)

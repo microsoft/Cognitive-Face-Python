@@ -58,6 +58,8 @@ class Key(object):
 class BaseUrl(object):
     @classmethod
     def set(cls, base_url):
+        if not base_url.endswith('/'):
+            base_url += '/'
         cls.base_url = base_url
 
     @classmethod

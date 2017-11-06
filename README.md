@@ -2,8 +2,7 @@
 This repo contains the Python SDK for the Microsoft Face API, an offering within [Microsoft Cognitive Services](https://azure.microsoft.com/en-us/services/cognitive-services/), formerly known as Project Oxford.
 
 * [Learn about the Face API](https://azure.microsoft.com/en-us/services/cognitive-services/face/)
-* [Read the documentation](https://docs.microsoft.com/en-us/azure/cognitive-services/face/overview)
-* [More SDKs & Samples](https://azure.microsoft.com/en-us/resources/samples/?api=face&sort=0&service=cognitive-services&term=face)
+* [Documentation & API Reference & SDKs](https://docs.microsoft.com/en-us/azure/cognitive-services/face/)
 
 ## Getting started
 
@@ -37,7 +36,7 @@ python setup.py install
 
 ### Running the unit tests
 
-To run the tests you will need a valid subscription. You can get one [here](https://azure.microsoft.com/en-gb/try/cognitive-services/?api=face-api).
+To run the tests you will need a valid subscription. You can get one [here](https://azure.microsoft.com/en-us/try/cognitive-services/?api=face-api).
 
 1. Copy `cognitive_face/tests/config.sample.py`  into `cognitive_face/tests/config.py`.
 1. Change the `KEY` and `BASE_URL` parameters to your own subscription's API key and endpoint.

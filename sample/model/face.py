@@ -17,7 +17,7 @@ class Rect(object):
         self.set_rect(rect)
 
     def set_rect(self, rect):
-        """docstring for set_rect"""
+        """Set rectangle."""
         self.left = int(rect['left'])
         self.top = int(rect['top'])
         self.width = int(rect['width'])

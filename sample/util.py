@@ -178,7 +178,7 @@ def async(func):
     """Async wrapper."""
 
     def wrapper(*args, **kwargs):
-        """docstring for wrapper"""
+        """Async wrapper."""
         thr = Thread(target=func, args=args, kwargs=kwargs)
         thr.start()
 

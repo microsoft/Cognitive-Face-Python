@@ -1,4 +1,4 @@
-# Microsoft Face API: Python SDK
+# Microsoft Face API: Python SDK & Sample
 This repo contains the Python SDK for the Microsoft Face API, an offering within [Microsoft Cognitive Services](https://azure.microsoft.com/en-us/services/cognitive-services/), formerly known as Project Oxford.
 
 * [Learn about the Face API](https://azure.microsoft.com/en-us/services/cognitive-services/face/)
@@ -84,7 +84,7 @@ This project has adopted the [Microsoft Open Source Code of Conduct](https://ope
 All Microsoft Cognitive Services SDKs and samples are licensed with the MIT License. For more details, see
 [LICENSE](/LICENSE.md).
 
-Sample images are licensed separately, please refer to [LICENSE-IMAGE](/LICENSE-IMAGE.md)
+Sample images are licensed separately, please refer to [LICENSE-IMAGE](/LICENSE-IMAGE.md).
 
 ## Developer Code of Conduct
 Developers using Cognitive Services, including this sample, are expected to follow the “Developer Code of Conduct for Microsoft Cognitive Services”, found at [http://go.microsoft.com/fwlink/?LinkId=698895](http://go.microsoft.com/fwlink/?LinkId=698895).

@@ -39,7 +39,7 @@ class SubscriptionPanel(MyPanel):
         self.link.SetBackgroundColour(colour_window)
         self.sizer.Add(self.link, flag=flag, border=5)
 
-        subgridsizer = wx.GridSizer(rows=2, cols=2)
+        subgridsizer = wx.GridSizer(rows=2, cols=2, hgap=5, vgap=5)
 
         flag = wx.ALIGN_CENTER_VERTICAL | wx.ALL | wx.FIXED_MINSIZE
         label = 'Subscription Key : '

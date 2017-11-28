@@ -47,7 +47,7 @@ class SubscriptionPanel(MyPanel):
         subgridsizer.Add(self.subscription_key_label, flag=flag, border=5)
 
         flag = wx.EXPAND | wx.ALIGN_CENTER_VERTICAL | wx.ALL
-        subscription_key = util.SubscriptionKey.get().decode('utf-8')
+        subscription_key = util.SubscriptionKey.get()
         self.subscription_key_text = wx.TextCtrl(self, size=(-1, -1))
         self.subscription_key_text.SetValue(subscription_key)
         subgridsizer.Add(self.subscription_key_text, 1, flag=flag, border=5)
@@ -58,7 +58,7 @@ class SubscriptionPanel(MyPanel):
         subgridsizer.Add(self.endpoint_label, flag=flag, border=5)
 
         flag = wx.EXPAND | wx.ALIGN_CENTER_VERTICAL | wx.ALL
-        endpoint = util.Endpoint.get().decode('utf-8')
+        endpoint = util.Endpoint.get()
         self.endpoint_text = wx.TextCtrl(self, size=(-1, -1))
         self.endpoint_text.SetValue(endpoint)
         subgridsizer.Add(self.endpoint_text, 1, flag=flag, border=5)
@@ -86,8 +86,8 @@ class SubscriptionPanel(MyPanel):
     def OnSave(self, evt):
         """Save the key and endpoint."""
         util.SubscriptionKey.set(
-            self.subscription_key_text.GetValue().encode('utf-8'))
-        util.Endpoint.set(self.endpoint_text.GetValue().encode('utf-8'))
+            self.subscription_key_text.GetValue())
+        util.Endpoint.set(self.endpoint_text.GetValue())
         text = (
             'Settings successfully saved on your disk.\nYou do not need to '
             'paste the key next time.')

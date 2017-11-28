@@ -124,7 +124,7 @@ class FindSimilarsResult(wx.Panel):
                 self, label='{} Mode:'.format(mode))
             self.sizer.Add(static_text_caption, 0, wx.EXPAND)
 
-            for face_id, face in faces.iteritems():
+            for face_id, face in faces.items():
 
                 static_line = wx.StaticLine(self)
                 self.sizer.Add(static_line, 0, wx.EXPAND)
@@ -167,7 +167,7 @@ class CaptionWrapFaceList(wx.Panel):
         """Set the data."""
         self.sizer.Clear(True)
 
-        for caption, faces in caption_faces_list.iteritems():
+        for caption, faces in caption_faces_list.items():
             static_text = wx.StaticText(self, label=caption)
             self.sizer.Add(static_text, 0, wx.ALIGN_LEFT)
             wrap_face_list = WrapFaceList(self, faces, size)

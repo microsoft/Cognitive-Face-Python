@@ -6,6 +6,7 @@ Description: util module for Python SDK sample.
 """
 
 from threading import Thread
+import io
 import operator
 import os.path
 
@@ -51,7 +52,7 @@ class SubscriptionKey(object):
             cls.key = ''
         if not cls.key:
             if os.path.isfile(SUBSCRIPTION_KEY_FILENAME):
-                with file(SUBSCRIPTION_KEY_FILENAME) as fin:
+                with io.open(SUBSCRIPTION_KEY_FILENAME, encoding='utf-8') as fin:
                     cls.key = fin.read().strip()
             else:
                 cls.key = ''
@@ -62,8 +63,8 @@ class SubscriptionKey(object):
     def set(cls, key):
         """Set the subscription key."""
         cls.key = key
-        with file(SUBSCRIPTION_KEY_FILENAME, 'w') as fout:
-            print >> fout, key
+        with io.open(SUBSCRIPTION_KEY_FILENAME, 'w', encoding='utf-8') as fout:
+            fout.write(key)
         CF.Key.set(cls.key)
 
     @classmethod
@@ -85,7 +86,7 @@ class Endpoint(object):
             cls.endpoint = ''
         if not cls.endpoint:
             if os.path.isfile(ENDPOINT_FILENAME):
-                with file(ENDPOINT_FILENAME) as fin:
+                with io.open(ENDPOINT_FILENAME, encoding='utf-8') as fin:
                     cls.endpoint = fin.read().strip()
             else:
                 cls.endpoint = CF.BaseUrl.get()
@@ -96,8 +97,8 @@ class Endpoint(object):
     def set(cls, endpoint):
         """Set the endpoint."""
         cls.endpoint = endpoint
-        with file(ENDPOINT_FILENAME, 'w') as fout:
-            print >> fout, endpoint
+        with io.open(ENDPOINT_FILENAME, 'w', encoding='utf-8') as fout:
+            fout.write(endpoint)
         CF.BaseUrl.set(cls.endpoint)
 
     @classmethod
@@ -164,14 +165,14 @@ def draw_bitmap_rectangle(bitmap, faces):
 
 def pil_image_to_wx_image(pil_image):
     """Convert from PIL image to wx image."""
-    wx_image = wx.EmptyImage(pil_image.width, pil_image.height)
+    wx_image = wx.Image(pil_image.width, pil_image.height)
     wx_image.SetData(pil_image.convert("RGB").tobytes())
     return wx_image
 
 
 def key_with_max_value(item):
     """Get the key with maximum value in a dict."""
-    return max(item.iteritems(), key=operator.itemgetter(1))[0]
+    return max(item.items(), key=operator.itemgetter(1))[0]
 
 
 def async(func):

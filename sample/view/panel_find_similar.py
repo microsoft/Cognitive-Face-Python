@@ -110,8 +110,8 @@ class FindSimilarPanel(base.MyPanel):
                 'Request: List {} will be used to build a person database. '
                 'Checking whether the list exists.').format(
                     self.large_face_list_id))
-            print dir(util.CF)
-            print util.CF.__file__
+            print(dir(util.CF))
+            print(util.CF.__file__)
             util.CF.large_face_list.get(self.large_face_list_id)
             large_face_list_exists = True
             self.log.log(

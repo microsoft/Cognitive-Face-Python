@@ -50,10 +50,13 @@ python setup.py test
 
 A sample desktop application is also provided.
 
-To run it, install the following prerequisites:
+Currently it support the following combination of prerequisites:
 
-- [Python 2.7](https://www.python.org/downloads/) (version 3 is **not** currently supported, you can vote for this feature [here](https://github.com/Microsoft/Cognitive-Face-Python/issues/30))
-- [wxPython 3.0.2](https://sourceforge.net/projects/wxpython/files/wxPython/3.0.2.0/) (version 4 is **not** currently supported)
+1. [Python 3](https://www.python.org/downloads/) + [wxPython 4](https://pypi.python.org/pypi/wxPython) **[Recommended]**
+1. [Python 2](https://www.python.org/downloads/) + [wxPython 4](https://pypi.python.org/pypi/wxPython)
+1. [Python 2](https://www.python.org/downloads/) + [wxPython 3](https://sourceforge.net/projects/wxpython/files/wxPython/3.0.2.0/)
+
+P.S. WxPython 3 does not support Python 3 by design.
 
 Then run the following:
 

@@ -7,7 +7,7 @@ Description: Face section of the Cognitive Face API.
 from . import util
 
 
-def detect(image, face_id=True, landmarks=False, attributes=''):
+def detect(image, face_id=True, landmarks=False, attributes='', content_type='application/json'):
     """Detect human faces in an image and returns face locations, and
     optionally with `face_id`s, landmarks, and attributes.
 
@@ -30,6 +30,8 @@ def detect(image, face_id=True, landmarks=False, attributes=''):
         contain the corresponding values depending on input parameters.
     """
     url = 'detect'
+    
+    headers["content-type"] = content_type
     headers, data, json = util.parse_image(image)
     params = {
         'returnFaceId': face_id and 'true' or 'false',

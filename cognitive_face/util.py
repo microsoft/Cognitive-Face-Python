@@ -18,7 +18,6 @@ TIME_SLEEP = 1
 
 class CognitiveFaceException(Exception):
     """Custom Exception for the python SDK of the Cognitive Face API.
-
     Attributes:
         status_code: HTTP response status code.
         code: error code.
@@ -82,7 +81,12 @@ def request(method, url, data=None, json=None, headers=None, params=None):
     if 'Content-Type' not in headers:
         headers['Content-Type'] = 'application/json'
     headers['Ocp-Apim-Subscription-Key'] = Key.get()
-
+    
+    # Check that the content-type is valid
+    if headers['content-type'] not 'application/json':
+        if headers ['content-type'] not 'application/octet-stream':
+            raise ValueError('Invalid request body type:' + headers['Content-Type'])
+            
     response = requests.request(
         method,
         url,
@@ -116,13 +120,10 @@ def request(method, url, data=None, json=None, headers=None, params=None):
 
 def parse_image(image):
     """Parse the image smartly and return metadata for request.
-
     First check whether the image is a URL or a file path or a file-like object
     and return corresponding metadata.
-
     Args:
         image: A URL or a file path or a file-like object represents an image.
-
     Returns:
         a three-item tuple consist of HTTP headers, binary data and json data
         for POST.

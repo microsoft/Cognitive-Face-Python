@@ -30,7 +30,7 @@ def detect(image, face_id=True, landmarks=False, attributes='', content_type='ap
         contain the corresponding values depending on input parameters.
     """
     url = 'detect'
-    headers["content-type"] = content_type
+    headers['content-type'] = content_type
     headers, data, json = util.parse_image(image)
     params = {
         'returnFaceId': face_id and 'true' or 'false',

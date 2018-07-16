@@ -49,7 +49,7 @@ def add_face(image,
 
 def create(person_group_id, name, user_data=None):
     """Create a new person in a specified person group. A newly created person
-    have no registered face, you can call `person.add` to add faces to the
+    have no registered face, you can call `person.add_face` to add faces to the
     person.
 
     Args:

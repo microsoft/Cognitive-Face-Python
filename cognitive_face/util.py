@@ -89,8 +89,7 @@ def request(method, url, data=None, json=None, headers=None, params=None):
         params=params,
         data=data,
         json=json,
-        headers=headers,
-        verify=False)
+        headers=headers)
 
     # Handle result and raise custom exception when something wrong.
     result = None

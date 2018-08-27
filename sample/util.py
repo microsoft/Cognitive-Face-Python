@@ -175,7 +175,7 @@ def key_with_max_value(item):
     return max(item.items(), key=operator.itemgetter(1))[0]
 
 
-def async(func):
+async def func()::
     """Async wrapper."""
 
     def wrapper(*args, **kwargs):

@@ -26,6 +26,7 @@ setup(
     author='Microsoft',
     description='Python SDK for the Cognitive Face API',
     long_description=readme(),
+    long_description_content_type='text/markdown',
     license='MIT',
     url='https://github.com/Microsoft/Cognitive-Face-Python',
     classifiers=[

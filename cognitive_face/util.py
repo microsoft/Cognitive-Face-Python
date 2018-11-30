@@ -120,13 +120,17 @@ def parse_image(image):
     and return corresponding metadata.
 
     Args:
-        image: A URL or a file path or a file-like object represents an image.
+        image: A bytes object, URL, file path or a file-like object representing an image.
 
     Returns:
         a three-item tuple consist of HTTP headers, binary data and json data
         for POST.
     """
-    if hasattr(image, 'read'):  # When image is a file-like object.
+    if hasattr(image, 'decode'): #When image is a bytes object
+        headers = {'Content-Type': 'application/octet-stream'}
+        data = image
+        return headers, data, None
+    elif hasattr(image, 'read'):  # When image is a file-like object.
         headers = {'Content-Type': 'application/octet-stream'}
         data = image.read()
         return headers, data, None

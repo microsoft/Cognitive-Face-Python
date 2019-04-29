@@ -7,7 +7,7 @@ Description: Person Group section of the Cognitive Face API.
 from . import util
 
 
-def create(person_group_id, name=None, user_data=None):
+def create(person_group_id, name=None, user_data=None, recognition_model=2):
     """Create a new person group with specified `person_group_id`, `name` and
     user-provided `user_data`.
 
@@ -18,6 +18,9 @@ def create(person_group_id, name=None, user_data=None):
         name: Person group display name. The maximum length is 128.
         user_data: User-provided data attached to the person group. The size
             limit is 16KB.
+        recognition_model: [Optional] Choose which model to use. At this moment
+            there are two possibilites: 1 (the original model) or 2 (the updated
+            model). Both should be input as an integer. 
 
     Returns:
         An empty response body.
@@ -28,8 +31,12 @@ def create(person_group_id, name=None, user_data=None):
         'name': name,
         'userData': user_data,
     }
+    params = {
+        'recognitionModel': "recognition_0"+str(recognition_model),
+        'returnRecognitionModel': 'true'
+    }
 
-    return util.request('PUT', url, json=json)
+    return util.request('PUT', url, json=json, params=params)
 
 
 def delete(person_group_id):

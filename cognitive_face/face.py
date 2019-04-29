@@ -7,7 +7,7 @@ Description: Face section of the Cognitive Face API.
 from . import util
 
 
-def detect(image, face_id=True, landmarks=False, attributes='', recognition_model = 1):
+def detect(image, face_id=True, landmarks=False, attributes='', recognition_model=2):
     """Detect human faces in an image and returns face locations, and
     optionally with `face_id`s, landmarks, and attributes.
 

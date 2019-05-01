@@ -68,6 +68,9 @@ def get(person_group_id):
         The person group's information.
     """
     url = 'persongroups/{}'.format(person_group_id)
+    params = {
+        'returnRecognitionModel': 'true'    
+    }
 
     return util.request('GET', url)
 

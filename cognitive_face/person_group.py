@@ -72,7 +72,7 @@ def get(person_group_id):
         'returnRecognitionModel': 'true'    
     }
 
-    return util.request('GET', url)
+    return util.request('GET', url, params=params)
 
 
 def get_status(person_group_id):

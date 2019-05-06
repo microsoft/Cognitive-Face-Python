@@ -30,9 +30,9 @@ def create(person_group_id, name=None, user_data=None, recognition_model=2):
     json = {
         'name': name,
         'userData': user_data,
+        'recognitionModel': "recognition_0"+str(recognition_model)
     }
     params = {
-        'recognitionModel': "recognition_0"+str(recognition_model),
         'returnRecognitionModel': 'true'
     }
 

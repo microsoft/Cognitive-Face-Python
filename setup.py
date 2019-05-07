@@ -20,7 +20,7 @@ def readme():
 
 setup(
     name='cognitive_face',
-    version='1.4.2',
+    version='1.5.0',
     packages=find_packages(exclude=['tests']),
     install_requires=['requests'],
     author='Microsoft',

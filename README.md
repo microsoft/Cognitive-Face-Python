@@ -3,7 +3,7 @@
 [![PyPi Version](https://img.shields.io/pypi/v/cognitive_face.svg)](https://pypi.org/project/cognitive_face/)
 [![License](https://img.shields.io/pypi/l/cognitive_face.svg)](https://github.com/Microsoft/Cognitive-Face-Python/blob/master/LICENSE)
 
-This SDK has been deprecated and been replaced by [Microsoft.Azure.CognitiveServices.Vision.Face](https://github.com/Azure/azure-sdk-for-python/tree/master/azure-cognitiveservices-vision-face) which is a part of Azure SDK.
+This SDK has been deprecated and been replaced by [Microsoft.Azure.CognitiveServices.Vision.Face](https://github.com/Azure/azure-sdk-for-python/tree/master/sdk/cognitiveservices/azure-cognitiveservices-vision-face) which is a part of Azure SDK.
 
 This repo contains the Python SDK for the Microsoft Face API, an offering within [Microsoft Cognitive Services](https://azure.microsoft.com/en-us/services/cognitive-services/), formerly known as Project Oxford.
 

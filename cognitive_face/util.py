@@ -134,6 +134,10 @@ def parse_image(image):
         headers = {'Content-Type': 'application/octet-stream'}
         data = open(image, 'rb').read()
         return headers, data, None
+    elif type(image) == bytes:   # You can read image file by yourself.
+        headers = {'Content-Type': 'application/octet-stream'}
+        data = image
+        return headers, data, None
     else:  # Default treat it as a URL (string).
         headers = {'Content-Type': 'application/json'}
         json = {'url': image}

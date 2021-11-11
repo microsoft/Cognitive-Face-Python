@@ -7,7 +7,7 @@ Description: Face section of the Cognitive Face API.
 from . import util
 
 
-def detect(image, face_id=True, landmarks=False, attributes=''):
+def detect(image, face_id=True, landmarks=False, attributes='', recognition_model=2):
     """Detect human faces in an image and returns face locations, and
     optionally with `face_id`s, landmarks, and attributes.
 
@@ -23,6 +23,9 @@ def detect(image, face_id=True, landmarks=False, attributes=''):
             headPose, smile, facialHair, glasses, emotion, makeup, accessories,
             occlusion, blur, exposure, noise. Note that each face attribute
             analysis has additional computational and time cost.
+        recognition_model: [Optional] Choose which model to use. At this moment
+            there are two possibilites: 1 (the original model) or 2 (the updated
+            model). Both should be input as an integer. 
 
     Returns:
         An array of face entries ranked by face rectangle size in descending
@@ -35,6 +38,8 @@ def detect(image, face_id=True, landmarks=False, attributes=''):
         'returnFaceId': face_id and 'true' or 'false',
         'returnFaceLandmarks': landmarks and 'true' or 'false',
         'returnFaceAttributes': attributes,
+        'recognitionModel': "recognition_0"+str(recognition_model),
+        'returnRecognitionModel': 'true'
     }
 
     return util.request(
